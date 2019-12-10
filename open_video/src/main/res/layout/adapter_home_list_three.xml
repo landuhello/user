@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/onename"
+        android:text="你猜猜啊"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#333333"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/threeimg1"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_74" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/threeimg2"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_74" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/threeimg3"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_74" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_14"
+        android:layout_toRightOf="@id/twosimple">
+
+        <TextView
+            android:id="@+id/onedoctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nicaiciaa"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/onetime"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>
