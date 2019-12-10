@@ -1,4 +1,4 @@
-package com.dingtao.rrmmp.util;
+package com.dingtao.common.util;
 
 import java.security.MessageDigest;
 public class MD5Utils {

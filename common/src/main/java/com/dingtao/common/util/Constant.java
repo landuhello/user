@@ -16,6 +16,8 @@ public class Constant {
 
     public final static String ACTIVITY_URL_patient = "/patients/SickFriendsActivity";
     public final static String ACTIVITY_URL_PATIENT = "/patients/ConditionsActivity";
+    public final static String ACTIVITY_URL_login = "/openlogin/LoginMainActivity";
+    public final static String ACTIVITY_URL_loginthree = "/openlogin/VideoFrag";
 
 
 

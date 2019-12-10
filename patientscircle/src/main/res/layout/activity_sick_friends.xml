@@ -59,31 +59,7 @@
         android:layout_marginTop="4dp"
         android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioGroup
-            android:id="@+id/rg"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            >
-            <RadioButton
-                android:id="@+id/rb1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:button="@null"
-                android:checked="true"
-                android:drawableBottom="@drawable/home_home_sel"
-                android:gravity="center"
-                android:paddingBottom="15dp">
 
-            </RadioButton>
-        </RadioGroup>
-
-    </RelativeLayout>
 
 
 </LinearLayout>

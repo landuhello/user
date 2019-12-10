@@ -3,10 +3,8 @@ package com.dingtao.rrmmp.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.icu.text.TimeZoneFormat;
+import android.media.ThumbnailUtils;
 import android.util.Log;
-
-import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dingtao.common.bean.video.VideovolBean;
 import com.dingtao.common.util.DateUtils;
@@ -25,12 +25,12 @@ import com.shuyu.gsyvideoplayer.listener.GSYVideoProgressListener;
 import com.shuyu.gsyvideoplayer.listener.GSYVideoShotListener;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * data:${DATA}
@@ -38,7 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * function
  */
 public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolder> {
-    private List<VideovolBean> mData1=new ArrayList<>();
+    private List<VideovolBean> mData1 = new ArrayList<>();
     public Boolean miscollect = false;
     public Boolean misdammu = false;
     private VideovolBean mBean;
@@ -49,7 +49,13 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         mData1 = data1;
         mContext = context;
     }
+    public Boolean getMiscollect() {
+        return miscollect;
+    }
 
+    public void setMiscollect(Boolean miscollect) {
+        this.miscollect = miscollect;
+    }
     @Override
     public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item, parent, false);
@@ -70,11 +76,14 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         thumbImageViewLayout.addView(textView);
 
-
-
-
-
-
+        //设置全屏按键功能
+        holder.gsyVideoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resolveFullBtn(holder.gsyVideoPlayer);
+            }
+        });
+        Bitmap videoThumbnail = getVideoThumbnail(mData1.get(position).getOriginalUrl(), 2,500,500);
         //增加封面视频
         ImageView imageView = new ImageView(holder.itemView.getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -126,22 +135,6 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
                 }).build(holder.gsyVideoPlayer);
 
 
-//
-//        //点击芭比
-//        videoViewHolder.fm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //获取截图
-//                videoViewHolder.gsyVideoPlayer.taskShotPic(new GSYVideoShotListener() {
-//                    @Override
-//                    public void getBitmap(Bitmap bitmap) {
-//                        videoViewHolder.fm.setImageBitmap(bitmap);
-//                    }
-//                });
-//            }
-//        });
-
-
         //videoViewHolder.gsyVideoPlayer.setThumbImageView();
         //设置返回键
         holder.gsyVideoPlayer.getBackButton().setVisibility(View.GONE);
@@ -181,10 +174,10 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         }
 
         if (miscollect) {
-            mBean.setWhetherCollection(0);
+            mBean.setWhetherCollection(1);
             holder.videoItemCollection.setImageResource(R.mipmap.common_button_collection_small_s);
         } else {
-            mBean.setWhetherBuy(1);
+            mBean.setWhetherCollection(2);
             holder.videoItemCollection.setImageResource(R.mipmap.common_button_collection_small_n);
         }
 
@@ -197,7 +190,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
                 ArrayList<Integer> integers = new ArrayList<>();
                 integers.add(mBean.id);
                 integers.add(position);
-//                EventBus.getDefault().post(integers);
+               EventBus.getDefault().post(integers);
             }
         });
 
@@ -211,7 +204,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
             public void onProgress(int progress, int secProgress, int currentPosition, int duration) {
 
                 //设置可观看时间倒计时
-                mDatetime = new Date(duration-currentPosition);
+                mDatetime = new Date(duration - currentPosition);
 
                 String s = null;
                 try {
@@ -237,7 +230,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         holder.videoItemBarrage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                EventBus.getDefault().post(mBean.getId());
+                EventBus.getDefault().post(mBean.getId());
                 misdammu = !misdammu;
                 if (misdammu) {
                     //添加弹幕
@@ -261,10 +254,10 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
                     }
                 });
                 Integer[] ints = new Integer[3];
-                ints[0] = mBean.id;
-                ints[1] = mBean.price;
+                ints[0] = mBean.getId();
+                ints[1] = mBean.getPrice();
                 ints[2] = position;
-//                EventBus.getDefault().post(ints);
+                EventBus.getDefault().post(ints);
             }
         });
     }
@@ -293,6 +286,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
 
         private ImageView shangla;
         private StandardGSYVideoPlayer gsyVideoPlayer;
+
         public VideoViewHolder(View itemView) {
             super(itemView);
             gsyVideoPlayer = itemView.findViewById(R.id.detail_item_player);
@@ -307,5 +301,27 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
             shikanlinner = itemView.findViewById(R.id.shikanlinner);
         }
     }
+    private void resolveFullBtn(final StandardGSYVideoPlayer standardGSYVideoPlayer) {
+        standardGSYVideoPlayer.startWindowFullscreen(mContext, true, true);
+    }
+    public static Bitmap getVideoThumbnail(String videoPath, int kind, int width, int height) {
+        Bitmap bitmap = null;
+        // 获取视频的缩略图
+        bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
+        if (width > 0 && height > 0) {
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+                    ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+        }
 
+        return bitmap;
+    }
+    //接口回调
+    public interface Onclick{
+        void success(VideovolBean bean);
+    }
+    private Onclick mOnclick;
+
+    public void setOnclick(Onclick onclick) {
+        mOnclick = onclick;
+    }
 }
