@@ -138,40 +138,40 @@ public class VideoFrag extends WDFragment {
     }
     @Subscribe
     public void eventbuy(Integer[] strings) {
-        videoID = strings[0];//id
-        mvideoprice = strings[1];//价格
-        i = strings[2];//I
-        //如果已经购买去评论
-        if (resultBeans.get(i).getWhetherBuy() == 1) {
-            mVideoReview_xpop = new VideoReview_Xpop(getContext());
-            new XPopup.Builder(getContext())
-                    .setPopupCallback(new SimpleCallback() {  //监听弹窗create完毕
-                        @Override
-                        public void onCreated() {
-                            EditText videocoment = mVideoReview_xpop.findViewById(R.id.video_comment_edt);
-                            RelativeLayout review_xpopViewsend = mVideoReview_xpop.findViewById(R.id.video_comment_send);
-                            review_xpopViewsend.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    // danmuview.destroy();
-                                    //添加到接口
-                                    presenter.requestReleaseBarrage(videoID + "", "" + videocoment.getText().toString());
-                                    danmuview.addBarrage(new Barrage(videocoment.getText().toString(), R.color.white, true));
-                                    mVideoReview_xpop.dismiss();
-                                    //请求弹幕评论列表
-                                    // presenter.requestBarrageList(videoID + "");
-                                }
-                            });
-                        }
-                    })
-                    .autoOpenSoftInput(true)
-                    .hasStatusBarShadow(false) //
-                    .asCustom(mVideoReview_xpop)
-                    .show();
-        } else {
-            //请求钱包
-            presenter.requestUserwallet();
-        }
+//        videoID = strings[0];//id
+//        mvideoprice = strings[1];//价格
+//        i = strings[2];//I
+//        //如果已经购买去评论
+//        if (resultBeans.get(i).getWhetherBuy() == 1) {
+//            mVideoReview_xpop = new VideoReview_Xpop(getContext());
+//            new XPopup.Builder(getContext())
+//                    .setPopupCallback(new SimpleCallback() {  //监听弹窗create完毕
+//                        @Override
+//                        public void onCreated() {
+//                            EditText videocoment = mVideoReview_xpop.findViewById(R.id.video_comment_edt);
+//                            RelativeLayout review_xpopViewsend = mVideoReview_xpop.findViewById(R.id.video_comment_send);
+//                            review_xpopViewsend.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    // danmuview.destroy();
+//                                    //添加到接口
+//                                    presenter.requestReleaseBarrage(videoID + "", "" + videocoment.getText().toString());
+//                                    danmuview.addBarrage(new Barrage(videocoment.getText().toString(), R.color.white, true));
+//                                    mVideoReview_xpop.dismiss();
+//                                    //请求弹幕评论列表
+//                                    // presenter.requestBarrageList(videoID + "");
+//                                }
+//                            });
+//                        }
+//                    })
+//                    .autoOpenSoftInput(true)
+//                    .hasStatusBarShadow(false) //
+//                    .asCustom(mVideoReview_xpop)
+//                    .show();
+//        } else {
+//            //请求钱包
+//            presenter.requestUserwallet();
+//        }
     }
 
     @Override
