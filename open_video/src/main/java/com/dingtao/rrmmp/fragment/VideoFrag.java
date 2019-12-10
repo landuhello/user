@@ -2,6 +2,7 @@ package com.dingtao.rrmmp.fragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -270,6 +271,7 @@ public class VideoFrag extends WDFragment {
 
         private List<VideovolBean> mData1;
 
+        @SuppressLint("WrongConstant")
         @Override
         public void success(List<VideovolBean> data, Object... args) {
             mData1 = data;

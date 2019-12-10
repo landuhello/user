@@ -1,8 +1,11 @@
 package com.dingtao.rrmmp.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +23,11 @@ import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.adapter.SeachDoctorAdapter;
 import com.dingtao.rrmmp.adapter.SeachDrugsAdapter;
 import com.dingtao.rrmmp.login.R;
+import com.dingtao.rrmmp.main.adapter.SeachDieaseAdapter;
+import com.dingtao.rrmmp.main.myview.FlowView;
+import com.dingtao.rrmmp.main.presenter.HomeSearchPresenter;
+import com.dingtao.rrmmp.main.presenter.PopularSearchPresenter;
+import com.dingtao.rrmmp.myview.HistryFlowView;
 
 import java.util.List;
 
@@ -34,7 +42,7 @@ public class HomeSeachActivity extends AppCompatActivity {
     private EditText seach_edit;
     private TextView seach_seach;
     private TextView seach_histry;
-    private com.dingtao.rrmmp.main.myview.FlowView seach_flow;
+    private FlowView seach_flow;
     private TextView seach_popular;
     private LinearLayout line;
     private TextView seach_doctor;
@@ -45,10 +53,13 @@ public class HomeSeachActivity extends AppCompatActivity {
     private RecyclerView recycler_drugs;
     private LinearLayout line1;
     private SeachDoctorAdapter seachDoctorAdapter;
-    private com.dingtao.rrmmp.main.adapter.SeachDieaseAdapter seachDieaseAdapter;
+    private SeachDieaseAdapter seachDieaseAdapter;
     private SeachDrugsAdapter seachDrugsAdapter;
     private TextView seach_no_message;
     private LinearLayout line2;
+    private boolean isClick;
+    private HistryFlowView seach_histry_flow;
+    private LinearLayout seach_histry_line;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -64,6 +75,47 @@ public class HomeSeachActivity extends AppCompatActivity {
             }
         });
 
+        //判断是否有搜索记录
+        if (isClick == true) {
+            seach_histry.setVisibility(View.VISIBLE);
+            seach_histry_line.setVisibility(View.VISIBLE);
+        }
+
+        seach_edit.setLines(1);
+        seach_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String trim = seach_edit.getText().toString().trim();
+                int length = trim.length();
+                if (length == 0) {
+                    line.setVisibility(View.GONE);
+                    line1.setVisibility(View.GONE);
+                    line2.setVisibility(View.GONE);
+                    seach_popular.setVisibility(View.VISIBLE);
+                    //热门搜索
+                    PopularSearchPresenter popularSearchPresenter = new PopularSearchPresenter(new PopuLarP());
+                    popularSearchPresenter.reqeust();
+
+                    //判断是否有搜索记录
+                    if (isClick == true) {
+                        seach_histry.setVisibility(View.VISIBLE);
+                        seach_histry_line.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            }
+        });
+
         //点击搜索，进行搜索
         seach_seach.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +126,26 @@ public class HomeSeachActivity extends AppCompatActivity {
                     return;
                 }
 
-                com.dingtao.rrmmp.main.presenter.HomeSearchPresenter homeSearchPresenter = new com.dingtao.rrmmp.main.presenter.HomeSearchPresenter(new HomeSeachP());
+                HomeSearchPresenter homeSearchPresenter = new HomeSearchPresenter(new HomeSeachP());
                 homeSearchPresenter.reqeust(seachedit);
 
                 seach_popular.setVisibility(View.GONE);
                 line.setVisibility(View.GONE);
+                isClick = true;
 
+            }
+        });
+
+        //热门搜索
+        PopularSearchPresenter popularSearchPresenter = new PopularSearchPresenter(new PopuLarP());
+        popularSearchPresenter.reqeust();
+
+        seach_flow.setTextClick(new FlowView.TextClick() {
+            @Override
+            public void onClick(String msg) {
+                Toast.makeText(HomeSeachActivity.this, msg, Toast.LENGTH_SHORT).show();
+                HomeSearchPresenter homeSearchPresenter = new HomeSearchPresenter(new HomeSeachP());
+                homeSearchPresenter.reqeust(msg);
             }
         });
 
@@ -95,14 +161,37 @@ public class HomeSeachActivity extends AppCompatActivity {
 
         seachDoctorAdapter = new SeachDoctorAdapter();
         recycler_doctor.setAdapter(seachDoctorAdapter);
-        seachDieaseAdapter = new com.dingtao.rrmmp.main.adapter.SeachDieaseAdapter();
+        seachDieaseAdapter = new SeachDieaseAdapter();
         recycler_disease.setAdapter(seachDieaseAdapter);
         seachDrugsAdapter = new SeachDrugsAdapter();
         recycler_drugs.setAdapter(seachDrugsAdapter);
 
-        //热门搜索
-        com.dingtao.rrmmp.main.presenter.PopularSearchPresenter popularSearchPresenter = new com.dingtao.rrmmp.main.presenter.PopularSearchPresenter(new PopuLarP());
-        popularSearchPresenter.reqeust();
+        seachDieaseAdapter.setDieaseBackId(new SeachDieaseAdapter.DieaseBackId() {
+            @Override
+            public void onbackid(int dieaseid, String namea) {
+                Intent intent=new Intent(HomeSeachActivity.this,BingDetailsActivity.class);
+                intent.putExtra("idsa",dieaseid+"");
+                intent.putExtra("idname",namea);
+                startActivity(intent);
+            }
+        });
+
+        seachDrugsAdapter.setDrugsBackId(new SeachDrugsAdapter.DrugsBackId() {
+            @Override
+            public void onbackid(int drugsid, String doctorname) {
+                Toast.makeText(HomeSeachActivity.this, doctorname, Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(HomeSeachActivity.this,DrugsDetailsActivity.class);
+                intent.putExtra("idsss",drugsid+"");
+                startActivity(intent);
+            }
+        });
+
+        seachDoctorAdapter.setDoctorBackId(new SeachDoctorAdapter.DoctorBackId() {
+            @Override
+            public void onbackid(int doctorid, String dname) {
+                Toast.makeText(HomeSeachActivity.this, dname, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -111,7 +200,7 @@ public class HomeSeachActivity extends AppCompatActivity {
         seach_edit = (EditText) findViewById(R.id.seach_edit);
         seach_seach = (TextView) findViewById(R.id.seach_seach);
         seach_histry = (TextView) findViewById(R.id.seach_histry);
-        seach_flow = (com.dingtao.rrmmp.main.myview.FlowView) findViewById(R.id.seach_flow);
+        seach_flow = (FlowView) findViewById(R.id.seach_flow);
         seach_popular = (TextView) findViewById(R.id.seach_popular);
         line = (LinearLayout) findViewById(R.id.line);
         seach_doctor = (TextView) findViewById(R.id.seach_doctor);
@@ -123,6 +212,8 @@ public class HomeSeachActivity extends AppCompatActivity {
         line1 = (LinearLayout) findViewById(R.id.line1);
         seach_no_message = (TextView) findViewById(R.id.seach_no_message);
         line2 = (LinearLayout) findViewById(R.id.line2);
+        seach_histry_flow = (HistryFlowView) findViewById(R.id.seach_histry_flow);
+        seach_histry_line = (LinearLayout) findViewById(R.id.seach_histry_line);
     }
 
     private class HomeSeachP implements DataCall<HomeSeachBean> {
@@ -136,6 +227,12 @@ public class HomeSeachActivity extends AppCompatActivity {
 
             //药品
             List<DrugsSearchVoListBean> drugsSearchVoList = data.drugsSearchVoList;
+
+            seach_histry_flow.addTag(seach_edit.getText().toString().trim());
+            seach_histry.setVisibility(View.GONE);
+            seach_histry_line.setVisibility(View.GONE);
+            seach_popular.setVisibility(View.GONE);
+            line.setVisibility(View.GONE);
 
             if (diseaseSearchVoList.size() == 0 && doctorSearchVoList.size() == 0 && drugsSearchVoList.size() == 0) {
                 line2.setVisibility(View.VISIBLE);
