@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.util.Constant;
-import com.dingtao.rrmmp.fragment.HomeFrag;
+import com.dingtao.rrmmp.fragment.ShouYeFragment;
 import com.dingtao.rrmmp.fragment.VideoFrag;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.login.R2;
@@ -50,7 +50,7 @@ public class LoginActivity extends WDActivity implements View.OnClickListener {
         home.setOnClickListener(this);
         video.setOnClickListener(this);
         final ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFrag());
+        fragments.add(new ShouYeFragment());
         fragments.add(new VideoFrag());
         //内部适配器
         home_pager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
