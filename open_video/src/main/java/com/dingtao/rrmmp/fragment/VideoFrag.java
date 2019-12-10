@@ -2,58 +2,36 @@ package com.dingtao.rrmmp.fragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.SPUtils;
-import com.dingtao.common.bean.LoginBean;
-import com.dingtao.common.bean.Result;
 import com.dingtao.common.bean.video.BulletBean;
-import com.dingtao.common.bean.video.ResultBean;
 import com.dingtao.common.bean.video.VideocatBean;
 import com.dingtao.common.bean.video.VideovolBean;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.WDFragment;
 import com.dingtao.common.core.exception.ApiException;
-import com.dingtao.common.util.Constant;
-import com.dingtao.rrmmp.activity.VideoBuyXPop;
-import com.dingtao.rrmmp.activity.VideoReview_Xpop;
 import com.dingtao.rrmmp.adapter.VideoAdpter;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.login.R2;
-import com.dingtao.rrmmp.presenter.VideoBuyPresenter;
 import com.dingtao.rrmmp.presenter.VideobulletPresenter;
 import com.dingtao.rrmmp.presenter.VideocatPresenter;
 import com.dingtao.rrmmp.presenter.VideodisplayPresenter;
-import com.dingtao.rrmmp.presenter.WalletPresenter;
 import com.google.android.material.tabs.TabLayout;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.kd.easybarrage.Barrage;
 import com.kd.easybarrage.BarrageView;
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.interfaces.SimpleCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import butterknife.BindView;
 
 /**
@@ -61,7 +39,6 @@ import butterknife.BindView;
  * author:刘(Administrator)
  * function
  */
-
 public class VideoFrag extends WDFragment {
 
 
@@ -88,8 +65,7 @@ public class VideoFrag extends WDFragment {
     @BindView(R2.id.show_video_no_net)
     RelativeLayout showVideoNoNet;
 
-    List<VideocatBean> data = new ArrayList<>();
-    List<VideovolBean> resultBeans=new ArrayList<>();
+    List<VideocatBean> data=new ArrayList<>();
     private int page = 1;
     private int categorid = 1;
     private VideocatPresenter mVideocatPresenter;
@@ -101,17 +77,6 @@ public class VideoFrag extends WDFragment {
     private RadioGroup mRadioGroup;
     private ImageView advisory;
     private Boolean islight = false;
-    private int videoID;
-    private String mSessionId;
-    private int mId;
-    private int mvideoId;
-    private int mPrice;
-    private int mResult;
-    private WalletPresenter mWalletPresenter;
-    private VideoBuyPresenter mVideoBuyPresenter;
-    private int mvideoprice;
-    private int i;
-    private VideoReview_Xpop mVideoReview_xpop;
 
     @Override
     public String getPageName() {
@@ -127,57 +92,13 @@ public class VideoFrag extends WDFragment {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
 
-    }
-
-    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
-        public void dologin(LoginBean bean) {
-            mSessionId = bean.sessionId;
-            mId = bean.id;
-    }
-    @Subscribe
-    public void eventbuy(Integer[] strings) {
-//        videoID = strings[0];//id
-//        mvideoprice = strings[1];//价格
-//        i = strings[2];//I
-//        //如果已经购买去评论
-//        if (resultBeans.get(i).getWhetherBuy() == 1) {
-//            mVideoReview_xpop = new VideoReview_Xpop(getContext());
-//            new XPopup.Builder(getContext())
-//                    .setPopupCallback(new SimpleCallback() {  //监听弹窗create完毕
-//                        @Override
-//                        public void onCreated() {
-//                            EditText videocoment = mVideoReview_xpop.findViewById(R.id.video_comment_edt);
-//                            RelativeLayout review_xpopViewsend = mVideoReview_xpop.findViewById(R.id.video_comment_send);
-//                            review_xpopViewsend.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    // danmuview.destroy();
-//                                    //添加到接口
-//                                    presenter.requestReleaseBarrage(videoID + "", "" + videocoment.getText().toString());
-//                                    danmuview.addBarrage(new Barrage(videocoment.getText().toString(), R.color.white, true));
-//                                    mVideoReview_xpop.dismiss();
-//                                    //请求弹幕评论列表
-//                                    // presenter.requestBarrageList(videoID + "");
-//                                }
-//                            });
-//                        }
-//                    })
-//                    .autoOpenSoftInput(true)
-//                    .hasStatusBarShadow(false) //
-//                    .asCustom(mVideoReview_xpop)
-//                    .show();
-//        } else {
-//            //请求钱包
-//            presenter.requestUserwallet();
-//        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
@@ -187,23 +108,14 @@ public class VideoFrag extends WDFragment {
         mVideocatPresenter.reqeust();
         //视频资源
         mVideodisplayPresenter = new VideodisplayPresenter(new display());
-        mVideodisplayPresenter.reqeust(1, 1, 5);
-        //查看视频弹幕
+        mVideodisplayPresenter.reqeust(1,1,5);
+       //查看视频弹幕
         mVideobulletPresenter = new VideobulletPresenter(new buttlt());
         mVideobulletPresenter.reqeust(1);
-        //购买视频请求
-        mVideoBuyPresenter = new VideoBuyPresenter(new Buy());
-
-        //查询H币是否有钱
-        mWalletPresenter = new WalletPresenter(new Hmoney());
-        mWalletPresenter.reqeust(mId,mSessionId);
-        //发送弹幕
 
         initdata();
         initlast();
-
     }
-
 
     private void initlast() {
         //setVisibility方法设置是否显示组件
@@ -219,12 +131,11 @@ public class VideoFrag extends WDFragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    //判断是否第一次进入
-                    boolean onevideo = SPUtils.getInstance().getBoolean("onevideo");
-                    if (!onevideo) {
-                        isone();
-                        SPUtils.getInstance().put("onevideo", true);
-                    }
+//                    boolean onevideo = SPUtils.getInstance().getBoolean("onevideo");
+//                    if (!onevideo) {
+//                        isone();
+////                        SPUtils.getInstance().put("onevideo", true);
+//                    }
                     if (islight) {
                         return;
                     }
@@ -353,7 +264,6 @@ public class VideoFrag extends WDFragment {
 
         }
     }
-
     //视频播放
     private class display implements DataCall<List<VideovolBean>> {
 
@@ -368,60 +278,9 @@ public class VideoFrag extends WDFragment {
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             //
             videoXrecy.setLayoutManager(linearLayoutManager);
-            videoAdpter = new VideoAdpter(data, getContext());
-
+            videoAdpter = new VideoAdpter(data,getContext());
             videoXrecy.setAdapter(videoAdpter);
             videoAdpter.notifyDataSetChanged();
-            //购买视频请求接口
-            videoAdpter.setOnclick(new VideoAdpter.Onclick() {
-
-
-
-
-                @Override
-                public void success(VideovolBean bean) {
-                    if (mSessionId != null) {
-                        //视频id和价格
-                        mvideoId = bean.id;
-                        mPrice = bean.price;
-                        //弹出价格的pup
-                        initpup();
-                        Toast.makeText(getActivity(), mvideoId+"", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
-                        intentByRouter(Constant.ACTIVITY_URL_login);
-                    }
-
-                }
-                //弹出价格的pup
-                private void initpup() {
-                    VideoOneShow videoOneShow = new VideoOneShow(getContext());
-                    TextView textView = videoOneShow.findViewById(R.id.video_buy_pop_price);
-                    //封面
-                    TextView videoBuyXPopprompt = videoOneShow.findViewById(R.id.video_buy_pop_prompt);
-                    videoOneShow.findViewById(R.id.video_buy_pop_recharge).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(getActivity(), "去充值", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    //提示不足
-                    videoBuyXPopprompt.setText("我的H币：" + mResult + ",H币不足?\t\t");
-                    ImageView imageView = videoOneShow.findViewById(R.id.video_buy_pop_cover);
-                    //设置封面
-                    imageView.setImageBitmap(videoAdpter.fengmian);
-                    LinearLayout linearLayout = videoOneShow.findViewById(R.id.video_buy_pop_hide_linner);
-                    videoOneShow.findViewById(R.id.video_buy_pop_nowbuy).setClickable(false);
-                    videoOneShow.findViewById(R.id.video_buy_pop_nowbuy).setBackgroundColor(Color.GRAY);
-                    videoOneShow.findViewById(R.id.video_buy_pop_nowbuy).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mVideoBuyPresenter.reqeust(mId, mSessionId, mvideoId, 5);
-                        }
-                    });
-                }
-            });
         }
 
         @Override
@@ -429,48 +288,16 @@ public class VideoFrag extends WDFragment {
 
         }
     }
-
     //查看视频弹幕
     private class buttlt implements DataCall<List<BulletBean>> {
 
 
         @Override
         public void success(List<BulletBean> data, Object... args) {
-            for (int i = 0; i < data.size(); i++) {
-                videoDanmu.addBarrage(new Barrage(data.get(i).content, R.color.black));
+            for (int i = 0; i <data.size() ; i++) {
+                videoDanmu.addBarrage(new Barrage(data.get(i).content,R.color.black));
             }
 
-        }
-
-        @Override
-        public void fail(ApiException data, Object... args) {
-
-        }
-    }
-
-    //买视频
-    private class Buy implements DataCall<Result> {
-        @Override
-        public void success(Result data, Object... args) {
-
-
-        }
-
-        @Override
-        public void fail(ApiException data, Object... args) {
-
-        }
-    }
-    //查看你有多少H币
-    private class Hmoney implements DataCall<ResultBean> {
-
-
-
-
-        @Override
-        public void success(ResultBean data, Object... args) {
-            //我有多少钱
-            mResult = data.result;
         }
 
         @Override
