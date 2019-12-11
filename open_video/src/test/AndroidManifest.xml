@@ -13,8 +13,8 @@
         <activity android:name="com.dingtao.rrmmp.activity.BingDetailsActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.DrugsDetailsActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.HomeSeachActivity"/>
-        <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
 
-        <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
+
+
     </application>
 </manifest>

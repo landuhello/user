@@ -8,6 +8,10 @@
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
+       <activity android:name="com.dingtao.rrmmp.activity.BingYaoActivity"/>
+        <activity android:name="com.dingtao.rrmmp.activity.BannerWebViewActivity"/>
+        <activity android:name="com.dingtao.rrmmp.activity.BingDetailsActivity"/>
+        <activity android:name="com.dingtao.rrmmp.activity.DrugsDetailsActivity"/>
+        <activity android:name="com.dingtao.rrmmp.activity.HomeSeachActivity"/>
     </application>
 </manifest>

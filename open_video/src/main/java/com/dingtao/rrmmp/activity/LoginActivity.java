@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.util.Constant;
+import com.dingtao.rrmmp.fragment.ShouYeFragment;
 import com.dingtao.rrmmp.fragment.VideoFrag;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.login.R2;
