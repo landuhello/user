@@ -155,8 +155,9 @@ public class VideoFrag extends WDFragment {
 //                                public void onClick(View v) {
 //                                    // danmuview.destroy();
 //                                    //添加到接口
+//                                    //发弹幕的请求
 //                                    presenter.requestReleaseBarrage(videoID + "", "" + videocoment.getText().toString());
-//                                    danmuview.addBarrage(new Barrage(videocoment.getText().toString(), R.color.white, true));
+//                                    danmuview.addBarrage(new Barrage(videocoment.getText().toString(), R.color.write, true));
 //                                    mVideoReview_xpop.dismiss();
 //                                    //请求弹幕评论列表
 //                                    // presenter.requestBarrageList(videoID + "");
@@ -366,7 +367,7 @@ public class VideoFrag extends WDFragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             // 默认是Vertical (HORIZONTAL则为横向列表)
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            //
+            //设置适配器
             videoXrecy.setLayoutManager(linearLayoutManager);
             videoAdpter = new VideoAdpter(data, getContext());
 
@@ -388,7 +389,8 @@ public class VideoFrag extends WDFragment {
                         initpup();
                         Toast.makeText(getActivity(), mvideoId+"", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                    }
+                    if (mSessionId==null){
                         Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
                         intentByRouter(Constant.ACTIVITY_URL_login);
                     }
