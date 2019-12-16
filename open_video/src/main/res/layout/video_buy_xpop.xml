@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/video_buy_xpop_shap"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/video_buy_pop_cover"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp"
+            android:src="@mipmap/message_icon_close_n" />
+
+        <TextView
+            android:id="@+id/video_buy_pop_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/video_buy_pop_cover"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
+            android:text="200H币"
+            android:textColor="#d92109"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/video_buy_pop_hide_linner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/common_icon_drop_down_n" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/video_buy_pop_cc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_buy_pop_price"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="52dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/video_buy_pop_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的H币:\t不足，"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/video_buy_pop_recharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立即充值"
+                android:textColor="#2196F3"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/video_buy_pop_nowbuy"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@id/video_buy_pop_cc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#3087ea"
+            android:text="立即购买"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

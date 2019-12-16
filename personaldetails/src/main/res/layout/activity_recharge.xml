@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.RechargeActivity">
+    <com.example.personaldetails.activity.BaseUserTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_title"/>
+
+    <RelativeLayout
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/t1"
+            android:layout_marginTop="54dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充值金额"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
+
+        <TextView
+            android:id="@+id/rmb_t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="¥"
+            android:textSize="72dp"
+            android:textColor="#333333"
+            android:layout_below="@id/t1"/>
+
+        <EditText
+            android:id="@+id/rmb_t2"
+            android:background="#00000000"
+            android:layout_marginLeft="34dp"
+            android:layout_toRightOf="@id/rmb_t1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textStyle="bold"
+            android:text="0"
+            android:textSize="72dp"
+            android:textColor="#3087ea"
+            android:layout_below="@id/t1"/>
+
+        <TextView
+            android:layout_alignBottom="@id/rmb_t1"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本次可获得                  H币"
+            android:textColor="#999999"/>
+
+        <TextView
+            android:id="@+id/hb"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/rmb_t1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="0dp"
+            android:text="0"
+            android:gravity="center"
+            android:textColor="#d92109" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f2f2f2"
+            android:layout_below="@id/rmb_t1"/>
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最低充值1元,1元可兑换100H币"
+            android:textColor="#999999"
+            android:layout_below="@id/rmb_t1"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_below="@id/t2"
+            android:id="@+id/t3"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:text="选择充值方式"/>
+
+        <RelativeLayout
+            android:id="@+id/vx_bt"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/t3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/vx_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/common_icon_weixin_n"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/vx_img"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信支付"
+                android:textColor="#333333"/>
+
+            <RadioButton
+                android:id="@+id/xz1"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/zfb_bt"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/vx_bt"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/zfb_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/common_icon_zhifubao_n"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/zfb_img"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信支付"
+                android:textColor="#333333"/>
+
+            <RadioButton
+                android:id="@+id/xz2"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/chongzhi"
+            android:layout_width="300dp"
+            android:layout_height="36dp"
+            android:background="@drawable/login_shape"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="充值"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

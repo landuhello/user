@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/show_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/video_xrecy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/video_cc" />
+
+        <com.kd.easybarrage.BarrageView
+            android:id="@+id/video_danmu"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="80dp"
+            app:allow_repeat="true"
+            app:border_color="#4fcb9f"
+            app:line_height="20dp"
+            app:max_text_size="20"
+            app:min_text_size="14"
+            app:random_color="false"
+            app:size="200" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/video_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/video_cc"
+            android:background="#fff"
+            android:visibility="visible"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="#3087ea"
+            app:tabTextColor="#929292"></com.google.android.material.tabs.TabLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/video_cc"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/video_user_head"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12sp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@mipmap/common_icon_keyboard_n" />
+
+            <ImageView
+                android:id="@+id/video_user_message"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:src="@mipmap/common_nav_message_black_n" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/video_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/drop_down"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/show_video_no_net"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/plache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/no_net" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/plache"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="网络异常\t请刷新重试"
+
+            android:textColor="#999999"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/reload_video"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/plache"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="重新加载"
+            android:textColor="#3087ea"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
