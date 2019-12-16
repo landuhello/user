@@ -1,5 +1,7 @@
 package com.dingtao.common.core.http;
 
+import com.dingtao.common.bean.FindDoctorBean;
+import com.dingtao.common.bean.InfoMationBean;
 import com.dingtao.common.bean.LoginBean;
 
 import com.dingtao.common.bean.DepartListBean;
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -159,5 +162,26 @@ public interface IAppRequest {
     //健康评测
     @GET("health/user/verify/v1/userHealthTest")
     Observable<Result> userHealthTest(@Header("userId") int userId, @Header("sessionId") String sessionId);
+
+    //咨询详情
+    @GET("health/share/information/v1/findInformation")
+    Observable<Result<InfoMationBean>> FINDINFOMATION(@Header("userId")int userId, @Header("sessionId")String sessionId, @Query("infoId")int infoId);
+
+    //咨询收藏
+    @POST("health/user/verify/v1/addInfoCollection")
+    @FormUrlEncoded
+    Observable<Result> ADDINFOCOLLECTION(@Header("userId")int userId,@Header("sessionId")String sessionId,@Field("infoId") int infoId);
+
+    //咨询取消收藏
+    @DELETE("health/user/verify/v1/cancelInfoCollection")
+    Observable<Result> CANCELINFOCOLLECTION(@Header("userId")int userId,@Header("sessionId")String sessionId,@Query("infoId")int infoId);
+
+    //查询医生列表
+    @GET("health/user/inquiry/v1/findDoctorList")
+    Observable<Result<List<FindDoctorBean>>> FINDDOCTORLIST(@Query("deptId")int deptId,
+                                                            @Query("condition")int condition,
+                                                            @Query("sortBy")int sortBy,
+                                                            @Query("page")int page,
+                                                            @Query("count")int count);
 
 }

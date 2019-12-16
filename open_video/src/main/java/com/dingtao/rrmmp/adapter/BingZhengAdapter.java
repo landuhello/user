@@ -42,6 +42,7 @@ public class BingZhengAdapter extends RecyclerView.Adapter<BingZhengAdapter.Type
 
     @Override
     public void onBindViewHolder(@NonNull final TypeViewHolder holder, final int position) {
+
         holder.bing_zheng_name.setText(list.get(position).departmentName);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +59,9 @@ public class BingZhengAdapter extends RecyclerView.Adapter<BingZhengAdapter.Type
         if (position==getmPosition()){
             holder.bing_zheng_view.setVisibility(View.VISIBLE);
             holder.itemView.setBackgroundColor(Color.WHITE);
+        }else{
+            holder.bing_zheng_view.setVisibility(View.GONE);
+            holder.itemView.setBackgroundColor(Color.GRAY);
         }
 
     }

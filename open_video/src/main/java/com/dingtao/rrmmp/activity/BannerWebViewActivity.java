@@ -26,15 +26,16 @@ public class BannerWebViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String bannerweb = intent.getStringExtra("bannerweb");
-        banner_webview.loadUrl(bannerweb);
-        banner_webview.setWebViewClient(new WebViewClient());
 
-    }
+        if (Integer.valueOf(bannerweb)==1){
+            banner_webview.loadUrl("https://www.wjx.cn/jq/33939807.aspx");
+            banner_webview.setWebViewClient(new WebViewClient());
+        }else {
+            banner_webview.loadUrl(bannerweb);
+            banner_webview.setWebViewClient(new WebViewClient());
+        }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+
 
     }
 

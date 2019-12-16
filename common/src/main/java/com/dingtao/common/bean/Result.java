@@ -6,10 +6,10 @@ package com.dingtao.common.bean;
  * qq:1940870847
  */
 public class Result<T>  {
-    String status;
-    String message;
-    T result;
-    String headPath;
+    public String status;
+    public String message;
+    public T result;
+    public String headPath;
 
     public Result(String status, String message) {
         this.status = status;

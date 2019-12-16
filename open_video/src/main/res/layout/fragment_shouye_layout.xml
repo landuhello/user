@@ -173,11 +173,14 @@
             <LinearLayout
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/depart_recycler"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </androidx.recyclerview.widget.RecyclerView>

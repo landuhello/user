@@ -55,6 +55,9 @@ public class DrugsAdapter extends RecyclerView.Adapter<DrugsAdapter.TypeViewHold
         if (position==getmPosition()){
             holder.yao_pin_view.setVisibility(View.VISIBLE);
             holder.itemView.setBackgroundColor(Color.WHITE);
+        }else {
+            holder.yao_pin_view.setVisibility(View.GONE);
+            holder.itemView.setBackgroundColor(Color.LTGRAY);
         }
     }
 

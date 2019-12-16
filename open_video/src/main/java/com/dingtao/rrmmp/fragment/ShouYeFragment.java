@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,15 +16,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingtao.common.bean.DepartListBean;
 import com.dingtao.common.bean.HomeBannerBean;
+import com.dingtao.common.bean.LoginBean;
 import com.dingtao.common.bean.PlateList;
 import com.dingtao.common.bean.PlateListBean;
+import com.dingtao.common.bean.Result;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.exception.ApiException;
+import com.dingtao.common.util.Constant;
 import com.dingtao.rrmmp.activity.BannerWebViewActivity;
 import com.dingtao.rrmmp.activity.BingYaoActivity;
+import com.dingtao.rrmmp.activity.FindDoctorActivity;
 import com.dingtao.rrmmp.activity.HomeSeachActivity;
+import com.dingtao.rrmmp.activity.InfoMationActivity;
+import com.dingtao.rrmmp.activity.LoginActivity;
+import com.dingtao.rrmmp.adapter.DrugsAdapter;
 import com.dingtao.rrmmp.adapter.HomeDepartAdapter;
 import com.dingtao.rrmmp.adapter.HomeListOneAdapter;
 import com.dingtao.rrmmp.adapter.HomeTypeAdapter;
@@ -32,6 +42,10 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -64,11 +78,14 @@ public class ShouYeFragment extends Fragment {
     public FrameLayout fram_shouye;
     private FrameLayout frag_shouye;
     private ImageView home_vertu;
+    private String mSessionId;
+    private int mId;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_shouye_layout, null, false);
+        EventBus.getDefault().register(this);
         fram_shouye = inflate.findViewById(R.id.frag_shouye);
         home_banner = inflate.findViewById(R.id.home_banner);
         home_bing_zheng = inflate.findViewById(R.id.home_bing_zheng);
@@ -83,6 +100,12 @@ public class ShouYeFragment extends Fragment {
         return inflate;
     }
 
+    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
+    public void dologin(LoginBean bean) {
+        mSessionId = bean.sessionId;
+        mId = bean.id;
+    }
+
     @SuppressLint("WrongConstant")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -91,8 +114,18 @@ public class ShouYeFragment extends Fragment {
         home_vertu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                com.dingtao.rrmmp.main.presenter.VertuPresenter vertuPresenter=new com.dingtao.rrmmp.main.presenter.VertuPresenter(new VertuP());
-                vertuPresenter.reqeust();
+                if (mId==0&&mSessionId==null){
+                    ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
+                            .navigation(getContext());
+                }else {
+                    /*com.dingtao.rrmmp.main.presenter.VertuPresenter vertuPresenter=new com.dingtao.rrmmp.main.presenter.VertuPresenter(new VertuP());
+                    vertuPresenter.reqeust(mId,mSessionId);*/
+
+                    Intent intent=new Intent(getContext(),BannerWebViewActivity.class);
+                    intent.putExtra("bannerweb",1+"");
+                    startActivity(intent);
+
+                }
             }
         });
 
@@ -147,6 +180,12 @@ public class ShouYeFragment extends Fragment {
         //banner轮播图
         com.dingtao.rrmmp.main.presenter.HomeBannerPresenter homeBannerPresenter = new com.dingtao.rrmmp.main.presenter.HomeBannerPresenter(new HomeBannerP());
         homeBannerPresenter.reqeust();
+
+        com.dingtao.rrmmp.main.presenter.PlateListPresenter plateListPresenter = new com.dingtao.rrmmp.main.presenter.PlateListPresenter(new MainPlatePresenter());
+        plateListPresenter.reqeust(1, 1, 5);
+        homeListOneAdapter = new HomeListOneAdapter();
+        home_recycler_list.setAdapter(homeListOneAdapter);
+
         //咨询类目
         homeTypeAdapter = new HomeTypeAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -163,10 +202,17 @@ public class ShouYeFragment extends Fragment {
                     plateListPresenter.reqeust(ids, 1, 5);
                     //咨询列表展示
                     homeListOneAdapter = new HomeListOneAdapter();
-                    homeListOneAdapter.onClearData();
                     home_recycler_list.setAdapter(homeListOneAdapter);
+                    homeListOneAdapter.onClearData();
                     homeListOneAdapter.notifyDataSetChanged();
                 }
+            }
+        });
+
+        homeTypeAdapter.setGetListener(new HomeTypeAdapter.getListener() {
+            @Override
+            public void mlistener(int mposition) {
+                homeTypeAdapter.setmPosition(mposition);
             }
         });
 
@@ -176,6 +222,15 @@ public class ShouYeFragment extends Fragment {
         gridLayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
         depart_recycler.setLayoutManager(gridLayoutManager);
         depart_recycler.setAdapter(homeDepartAdapter);
+
+        homeDepartAdapter.setDepartBack(new HomeDepartAdapter.DepartBack() {
+            @Override
+            public void backId(int did) {
+                Intent intent=new Intent(getContext(), FindDoctorActivity.class);
+                intent.putExtra("did",did+"");
+                startActivity(intent);
+            }
+        });
     }
 
     //咨询类目
@@ -209,9 +264,18 @@ public class ShouYeFragment extends Fragment {
     //咨询列表
     private class MainPlatePresenter implements DataCall<List<PlateList>> {
         @Override
-        public void success(List<PlateList> data, Object... args) {
+        public void success(final List<PlateList> data, Object... args) {
             homeListOneAdapter.OnAddAll(data);
             homeListOneAdapter.notifyDataSetChanged();
+
+            home_recycler_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent=new Intent(getContext(), InfoMationActivity.class);
+                    intent.putExtra("infoid",data.get(position).id+"");
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -269,15 +333,24 @@ public class ShouYeFragment extends Fragment {
         }
     }
 
-    private class VertuP implements DataCall {
+    private class VertuP implements DataCall<Result<String>> {
         @Override
-        public void success(Object data, Object... args) {
+        public void success(Result<String> data, Object... args) {
+            Intent intent=new Intent(getContext(),BannerWebViewActivity.class);
 
+            intent.putExtra("bannerweb",data.getResult());
+            startActivity(intent);
         }
 
         @Override
         public void fail(ApiException data, Object... args) {
-
+            Toast.makeText(getContext(), data.getDisplayMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

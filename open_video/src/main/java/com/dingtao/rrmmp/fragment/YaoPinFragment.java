@@ -59,6 +59,9 @@ public class YaoPinFragment extends Fragment {
         leftrecycler.setLayoutManager(linearLayoutManager);
         leftrecycler.setAdapter(drugsAdapter);
 
+        com.dingtao.rrmmp.main.presenter.DrugsListPresenter drugsListPresenter1=new com.dingtao.rrmmp.main.presenter.DrugsListPresenter(new DrugsListP());
+        drugsListPresenter1.reqeust(1,1,30);
+
         drugsAdapter.setYaoDrugsBack(new DrugsAdapter.YaoDrugsBack() {
             @Override
             public void yaoBack(int aid) {

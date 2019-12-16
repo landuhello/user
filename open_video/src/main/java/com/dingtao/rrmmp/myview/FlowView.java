@@ -71,7 +71,7 @@ public class FlowView extends ViewGroup {
         textView.setText(tag);
         textView.setTextSize(12);
         textView.setTextColor(Color.BLACK);
-        textView.setBackgroundColor(Color.GRAY);
+        textView.setBackgroundColor(android.graphics.Color.LTGRAY);
         textView.setPadding(10,10,10,10);
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.dingtao.common.bean.DepartListBean;
 import com.dingtao.common.bean.DiseaseListBean;
+import com.dingtao.common.bean.LoginBean;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.adapter.BingZhengAdapter;
@@ -16,6 +17,10 @@ import com.dingtao.rrmmp.adapter.DiseaseAdapter;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.main.presenter.DepartPresenter;
 import com.dingtao.rrmmp.main.presenter.DiseasePresenter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -37,6 +42,8 @@ public class BingZhengFragment extends Fragment {
     private RecyclerView leftrecycler,rightrecycler;
     private BingZhengAdapter bingZhengAdapter;
     private DiseaseAdapter diseaseAdapter;
+    private String mSessionId;
+    private int mId;
 
     @Nullable
     @Override
@@ -44,6 +51,7 @@ public class BingZhengFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_bing_zheng, container, false);
         leftrecycler = inflate.findViewById(R.id.leftrecycler);
         rightrecycler = inflate.findViewById(R.id.rightrecycler);
+        EventBus.getDefault().register(this);
         return inflate;
     }
 
@@ -63,8 +71,8 @@ public class BingZhengFragment extends Fragment {
         leftrecycler.setAdapter(bingZhengAdapter);
 
         //根据常见病症类目id查询常见病症列表
-        final DiseasePresenter diseasePresenter=new DiseasePresenter(new DiseaseP());
-        diseasePresenter.reqeust(1);
+        DiseasePresenter diseasePresenter=new DiseasePresenter(new DiseaseP());
+        diseasePresenter.reqeust(7);
 
         bingZhengAdapter.setGetListener(new BingZhengAdapter.getListener() {
             @Override
@@ -77,7 +85,8 @@ public class BingZhengFragment extends Fragment {
         bingZhengAdapter.setBingZhengBack(new BingZhengAdapter.BingZhengBack() {
             @Override
             public void bingBack(int aid) {
-                diseasePresenter.reqeust(aid);
+                DiseasePresenter diseasePresenter1=new DiseasePresenter(new DiseaseP());
+                diseasePresenter1.reqeust(aid);
             }
         });
 
@@ -88,6 +97,12 @@ public class BingZhengFragment extends Fragment {
         rightrecycler.setAdapter(diseaseAdapter);
         diseaseAdapter.notifyDataSetChanged();
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND, sticky = true)
+    public void dologin(LoginBean bean) {
+        mSessionId = bean.sessionId;
+        mId = bean.id;
     }
 
     private class DepartP implements DataCall<List<DepartListBean>> {
@@ -115,5 +130,11 @@ public class BingZhengFragment extends Fragment {
         public void fail(ApiException data, Object... args) {
             Toast.makeText(getContext(), data.getDisplayMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

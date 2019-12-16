@@ -1,5 +1,6 @@
 package com.dingtao.rrmmp.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,21 @@ public class HomeTypeAdapter extends RecyclerView.Adapter<HomeTypeAdapter.TypeVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (getListener!=null){
+                    getListener.mlistener(position);
+                }
+
                 onBackId.backid(list.get(position).id);
+                notifyDataSetChanged();
             }
         });
+
+        if (position==getmPosition()){
+            holder.homerecyclername.setTextColor(Color.BLUE);
+        }else {
+            holder.homerecyclername.setTextColor(Color.BLACK);
+        }
 
     }
 
@@ -73,6 +86,29 @@ public class HomeTypeAdapter extends RecyclerView.Adapter<HomeTypeAdapter.TypeVi
 
     public interface OnBackId{
         void backid(int ids);
+    }
+
+    //写一个接口回调，把条目id传到页面上
+    public getListener getListener;
+
+    //通过暴露的set方法把获取到的下标再赋值给一个自定义的int型常量
+    public void setGetListener(getListener getListener) {
+        this.getListener = getListener;
+    }
+
+    public interface getListener{
+        void mlistener(int mposition);
+    }
+
+    //自己定义的常量，进行一个set，get，get用于获取值，set用来设置值
+    private int mPosition;
+
+    public int getmPosition() {
+        return mPosition;
+    }
+
+    public void setmPosition(int mPosition) {
+        this.mPosition = mPosition;
     }
 
 }

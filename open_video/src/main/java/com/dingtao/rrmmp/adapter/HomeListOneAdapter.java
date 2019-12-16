@@ -33,10 +33,6 @@ public class HomeListOneAdapter extends BaseAdapter {
         }
     }
 
-    public void onClearData() {
-        list.clear();
-    }
-
     @Override
     public int getCount() {
         return list.size();
@@ -149,4 +145,9 @@ public class HomeListOneAdapter extends BaseAdapter {
         TextView onename, onedoctor, onetime;
         SimpleDraweeView twosimple,threeimg1,threeimg2,threeimg3;
     }
+
+    public void onClearData() {
+        list.clear();
+    }
+
 }

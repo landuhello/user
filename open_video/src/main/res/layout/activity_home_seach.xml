@@ -27,6 +27,9 @@
             android:padding="@dimen/dp_7"
             android:gravity="center_vertical"
             android:textSize="@dimen/sp_12"
+            android:lines="1"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
             android:textColor="#333333"
             android:background="@drawable/shape_home_seach_view"
             android:layout_marginLeft="@dimen/dp_10"
@@ -69,11 +72,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200">
 
-            <com.dingtao.rrmmp.myview.HistryFlowView
+            <ListView
                 android:id="@+id/seach_histry_flow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </com.dingtao.rrmmp.myview.HistryFlowView>
+                android:layout_height="match_parent"></ListView>
 
         </LinearLayout>
 
@@ -85,13 +87,13 @@
             android:textSize="@dimen/sp_16"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/line"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginLeft="@dimen/dp_20"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_300">
 

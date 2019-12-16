@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dingtao.rrmmp.login" >
-    <application>
+    <application
+        >
         <activity android:name="com.dingtao.rrmmp.activity.LoginActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
@@ -13,8 +14,5 @@
         <activity android:name="com.dingtao.rrmmp.activity.BingDetailsActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.DrugsDetailsActivity"/>
         <activity android:name="com.dingtao.rrmmp.activity.HomeSeachActivity"/>
-        <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
-
-        <activity android:name="com.dingtao.rrmmp.activity.RegisterActivity"/>
     </application>
 </manifest>

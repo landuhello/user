@@ -42,10 +42,19 @@ public class HomeDepartAdapter extends RecyclerView.Adapter<HomeDepartAdapter.Ty
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TypeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TypeViewHolder holder, final int position) {
         holder.depart_text_name.setText(list.get(position).departmentName);
         Uri uri=Uri.parse(list.get(position).pic);
         holder.departsimple.setImageURI(uri);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (departBack != null) {
+                    departBack.backId(list.get(position).id);
+                }
+            }
+        });
     }
 
     @Override
@@ -63,5 +72,15 @@ public class HomeDepartAdapter extends RecyclerView.Adapter<HomeDepartAdapter.Ty
             departsimple = itemView.findViewById(R.id.depart_simple);
             depart_text_name = itemView.findViewById(R.id.depart_text_name);
         }
+    }
+
+    public DepartBack departBack;
+
+    public void setDepartBack(DepartBack departBack) {
+        this.departBack = departBack;
+    }
+
+    public interface DepartBack{
+        void backId(int did);
     }
 }

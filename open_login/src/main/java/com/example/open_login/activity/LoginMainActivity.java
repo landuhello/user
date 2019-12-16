@@ -125,9 +125,8 @@ public class LoginMainActivity extends WDActivity {
         public void success(LoginBean data, Object... args) {
             Toast.makeText(LoginMainActivity.this, "欢迎" + data.userName + "使用", Toast.LENGTH_SHORT).show();
             if (data != null) {
-                intentByRouter(Constant.ACTIVITY_URL_LOGIN);
-
                 EventBus.getDefault().postSticky(data);
+                finish();
             }
         }
 

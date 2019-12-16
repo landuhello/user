@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,10 @@ import com.dingtao.common.bean.HomeSeachBean;
 import com.dingtao.common.bean.PopularSearchBean;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.exception.ApiException;
+import com.dingtao.rrmmp.adapter.HistryFlowAdapter;
 import com.dingtao.rrmmp.adapter.SeachDoctorAdapter;
 import com.dingtao.rrmmp.adapter.SeachDrugsAdapter;
+import com.dingtao.rrmmp.help.SeachFormat;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.main.adapter.SeachDieaseAdapter;
 import com.dingtao.rrmmp.main.myview.FlowView;
@@ -58,7 +61,7 @@ public class HomeSeachActivity extends AppCompatActivity {
     private TextView seach_no_message;
     private LinearLayout line2;
     private boolean isClick;
-    private HistryFlowView seach_histry_flow;
+    private ListView seach_histry_flow;
     private LinearLayout seach_histry_line;
 
     @SuppressLint("WrongConstant")
@@ -76,12 +79,20 @@ public class HomeSeachActivity extends AppCompatActivity {
         });
 
         //判断是否有搜索记录
-        if (isClick == true) {
-            seach_histry.setVisibility(View.VISIBLE);
+        List<String> searchHistory = SeachFormat.getSearchHistory();
+        if (searchHistory.size()==0){
+            seach_histry.setVisibility(View.GONE);
+            seach_histry_line.setVisibility(View.GONE);
+        }else {
             seach_histry_line.setVisibility(View.VISIBLE);
+            seach_histry.setVisibility(View.VISIBLE);
+
+            HistryFlowAdapter histryFlowAdapter=new HistryFlowAdapter();
+            histryFlowAdapter.AddAlla(searchHistory);
+            seach_histry_flow.setAdapter(histryFlowAdapter);
+
         }
 
-        seach_edit.setLines(1);
         seach_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,12 +117,6 @@ public class HomeSeachActivity extends AppCompatActivity {
                     PopularSearchPresenter popularSearchPresenter = new PopularSearchPresenter(new PopuLarP());
                     popularSearchPresenter.reqeust();
 
-                    //判断是否有搜索记录
-                    if (isClick == true) {
-                        seach_histry.setVisibility(View.VISIBLE);
-                        seach_histry_line.setVisibility(View.VISIBLE);
-                    }
-
                 }
             }
         });
@@ -125,6 +130,8 @@ public class HomeSeachActivity extends AppCompatActivity {
                     Toast.makeText(HomeSeachActivity.this, "请输入查询需要", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                SeachFormat.saveSearchHistory(seachedit);
 
                 HomeSearchPresenter homeSearchPresenter = new HomeSearchPresenter(new HomeSeachP());
                 homeSearchPresenter.reqeust(seachedit);
@@ -212,7 +219,7 @@ public class HomeSeachActivity extends AppCompatActivity {
         line1 = (LinearLayout) findViewById(R.id.line1);
         seach_no_message = (TextView) findViewById(R.id.seach_no_message);
         line2 = (LinearLayout) findViewById(R.id.line2);
-        seach_histry_flow = (HistryFlowView) findViewById(R.id.seach_histry_flow);
+        seach_histry_flow = (ListView) findViewById(R.id.seach_histry_flow);
         seach_histry_line = (LinearLayout) findViewById(R.id.seach_histry_line);
     }
 
@@ -228,7 +235,6 @@ public class HomeSeachActivity extends AppCompatActivity {
             //药品
             List<DrugsSearchVoListBean> drugsSearchVoList = data.drugsSearchVoList;
 
-            seach_histry_flow.addTag(seach_edit.getText().toString().trim());
             seach_histry.setVisibility(View.GONE);
             seach_histry_line.setVisibility(View.GONE);
             seach_popular.setVisibility(View.GONE);

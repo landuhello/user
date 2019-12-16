@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dp_110">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/find_simple"
+        app:roundedCornerRadius="@dimen/dp_4"
+        android:layout_width="@dimen/dp_91"
+        android:layout_height="@dimen/dp_110" />
+
+    <TextView
+        android:id="@+id/find_name"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#ffffff"
+        android:background="#D8D8D8"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:layout_width="@dimen/dp_91"
+        android:layout_height="@dimen/dp_26" />
+
+</RelativeLayout>
