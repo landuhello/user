@@ -12,7 +12,6 @@ import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.adapter.FindDepartAdapter;
 import com.dingtao.rrmmp.adapter.FindDoctorAdapter;
-import com.dingtao.rrmmp.adapter.HomeDepartAdapter;
 import com.dingtao.rrmmp.login.R;
 import com.dingtao.rrmmp.presenter.FindDoctorPresenter;
 import com.facebook.drawee.view.SimpleDraweeView;

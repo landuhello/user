@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.SPUtils;
 import com.dingtao.common.bean.LoginBean;
 import com.dingtao.common.core.DataCall;
 import com.dingtao.common.core.WDActivity;
@@ -61,6 +62,8 @@ public class LoginMainActivity extends WDActivity {
     @BindView(R2.id.weixin)
     ImageView weixin;
     private LoginPresenter mLoginPresenter;
+    private String trim;
+    private String encryptone;
 
     @Override
     protected int getLayoutId() {
@@ -94,9 +97,9 @@ public class LoginMainActivity extends WDActivity {
                 pasVisibile = true;
             }
         } else if (id == R.id.login) {
-            String trim = email.getText().toString().trim();
+            trim = email.getText().toString().trim();
             String trim1 = password.getText().toString().trim();
-            String encryptone = RsaCoder.encryptByPublicKey(trim1);
+            encryptone = RsaCoder.encryptByPublicKey(trim1);
 
 
             if (TextUtils.isEmpty(trim)) {
@@ -110,7 +113,7 @@ public class LoginMainActivity extends WDActivity {
             mLoadDialog.show();
             mLoginPresenter.reqeust(trim, encryptone);
 
-            android.util.Log.d("sessid",encryptone);
+            android.util.Log.d("sessid", encryptone);
 
         } else if (id == R.id.register) {
             Intent intent = new Intent(LoginMainActivity.this, RegisterActivity.class);
@@ -123,11 +126,24 @@ public class LoginMainActivity extends WDActivity {
 
         @Override
         public void success(LoginBean data, Object... args) {
-            Toast.makeText(LoginMainActivity.this, "欢迎" + data.userName + "使用", Toast.LENGTH_SHORT).show();
-            if (data != null) {
-                EventBus.getDefault().postSticky(data);
-                finish();
-            }
+            SPUtils.getInstance("login").put("email", trim);
+            SPUtils.getInstance("login").put("pwd", encryptone);
+            SPUtils.getInstance("login").put("isLogin", true);
+            SPUtils.getInstance("user").put("age", data.age);
+
+            SPUtils.getInstance("user").put("headPic", data.headPic);
+            SPUtils.getInstance("user").put("height", data.height);
+            SPUtils.getInstance("user").put("id", data.id);
+            SPUtils.getInstance("user").put("jiGuangPwd", data.jiGuangPwd);
+            SPUtils.getInstance("user").put("nickName", data.nickName);
+            SPUtils.getInstance("user").put("sessionId", data.sessionId);
+            SPUtils.getInstance("user").put("sex", data.sex);
+            SPUtils.getInstance("user").put("userName", data.userName);
+            SPUtils.getInstance("user").put("weight", data.weight);
+            SPUtils.getInstance("user").put("whetherBingWeChat", data.whetherBingWeChat);
+            SPUtils.getInstance("user").put("invitationCode", data.invitationCode);
+            EventBus.getDefault().postSticky(data);
+            finish();
         }
 
         @Override

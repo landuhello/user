@@ -2,6 +2,7 @@ package com.dingtao.rrmmp.videofragment;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -625,6 +626,7 @@ import butterknife.BindView;
     /**
      * 抖音滑动效果
      */
+    @SuppressLint("WrongConstant")
     public void initUI() {
 
 

@@ -1,19 +1,17 @@
 package com.example.personaldetails.activity;
 
+
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
 import com.dingtao.common.bean.LoginBean;
 import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.util.Constant;
@@ -25,10 +23,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.net.URL;
-
+import androidx.cardview.widget.CardView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = Constant.ACTIVITY_URL_persion)
@@ -86,9 +82,7 @@ public class PersionActivity extends WDActivity {
 
     @Override
     protected void initView() {
-//        name.setText(mNickName);
-//        mParse = Uri.parse(mHeadPic);
-//        header.setImageURI(mParse);
+
     }
 
     @Override

@@ -18,9 +18,7 @@ public class Constant {
     public final static String ACTIVITY_URL_PATIENT = "/patients/ConditionsActivity";
     public final static String ACTIVITY_URL_login = "/openlogin/LoginMainActivity";
     public final static String ACTIVITY_URL_loginthree = "/openlogin/VideoFrag";
-
-
-
+    public final static String ACTIVITY_URL_persion = "/persion/PersionActivity";
     //-----------open_main----首页模块随便动，我看提交历史删你库-----
 
     public final static String ACTIVITY_URL_MAIN = "/main/MainActivity";

@@ -10,8 +10,10 @@
         <activity android:name=".activity.RechargeActivity" />
         <activity android:name=".activity.WalletActivity" />
         <activity android:name=".activity.ArchivesActivity" />
-        <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.PersionActivity" />
+        <activity android:name=".activity.PersionActivity"/>
+        <activity android:name=".activity.set.UserMessageActivity"/>
+
+
     </application>
 
 </manifest>

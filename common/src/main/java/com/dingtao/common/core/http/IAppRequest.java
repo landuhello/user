@@ -2,6 +2,7 @@ package com.dingtao.common.core.http;
 
 import com.dingtao.common.bean.FindDoctorBean;
 import com.dingtao.common.bean.InfoMationBean;
+import com.dingtao.common.bean.FinduserarchivesBean;
 import com.dingtao.common.bean.LoginBean;
 
 import com.dingtao.common.bean.DepartListBean;
@@ -25,6 +26,9 @@ import com.dingtao.common.bean.video.ResultBean;
 import com.dingtao.common.bean.video.VideocatBean;
 import com.dingtao.common.bean.video.VideovolBean;
 
+import com.dingtao.common.bean.videobean.CategorylistBean;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,9 +51,13 @@ import retrofit2.http.Query;
  * qq:1940870847
  */
 public interface IAppRequest {
+
+//查找档案
+    @GET("health/user/verify/v1/findUserArchives")
+    Observable<FinduserarchivesBean> doarchives(@Header("userId")int userId,@Header("sessionId")String sessionId);
     //视频类目id
     @GET("health/user/video/v1/findVideoCategoryList")
-    Observable<Result<List<VideocatBean>>> dovideo();
+    Observable<CategorylistBean> dovideo();
 
     //根据视频id查找相关视频
     @GET("health/user/video/v1/findVideoVoList")

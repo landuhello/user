@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dingtao.common.bean.video.VideovolBean;
 import com.dingtao.common.util.DateUtils;
 import com.dingtao.rrmmp.login.R;
+import com.dingtao.rrmmp.bean.VideoListEntity;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
@@ -30,7 +31,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * data:${DATA}
@@ -38,17 +38,18 @@ import java.util.List;
  * function
  */
 public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolder> {
-    private List<VideovolBean> mData1 = new ArrayList<>();
+    private ArrayList<VideoListEntity.ResultBean> resultBeans;
     public Boolean miscollect = false;
     public Boolean misdammu = false;
-    private VideovolBean mBean;
     public Bitmap fengmian;
     private Context mContext;
 
-    public VideoAdpter(List<VideovolBean> data1, Context context) {
-        mData1 = data1;
+
+    public VideoAdpter(ArrayList<VideoListEntity.ResultBean> resultBeans, Context context) {
+        this.resultBeans = resultBeans;
         mContext = context;
     }
+
     public Boolean getMiscollect() {
         return miscollect;
     }
@@ -83,7 +84,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
                 resolveFullBtn(holder.gsyVideoPlayer);
             }
         });
-        Bitmap videoThumbnail = getVideoThumbnail(mData1.get(position).getOriginalUrl(), 2,500,500);
+        Bitmap videoThumbnail = getVideoThumbnail(resultBeans.get(position).getOriginalUrl(), 2,500,500);
         //增加封面视频
         ImageView imageView = new ImageView(holder.itemView.getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -100,7 +101,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         gsyVideoOptionBuilder.setIsTouchWiget(false)
                 //设置封面
                 .setThumbImageView(imageView)
-                .setUrl(mData1.get(position).originalUrl)
+                .setUrl(resultBeans.get(position).getOriginalUrl())
                 .setVideoTitle("000")
                 .setCacheWithPlay(false)
                 .setRotateViewAuto(true)
@@ -147,26 +148,26 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
             }
         });
         //videoViewHolder.gsyVideoPlayer;
-        mBean = mData1.get(position);
-        holder.videoItemName.setText(mBean.title);
-        holder.videoItemNeirong.setText(mBean.abstracts);
-        holder.YiBuy.setText(mBean.buyNum + "万人已购买");
+        final VideoListEntity.ResultBean resultBean = resultBeans.get(position);
+        holder.videoItemName.setText(resultBean.getTitle());
+        holder.videoItemNeirong.setText(resultBean.getAbstracts());
+        holder.YiBuy.setText(resultBean.getBuyNum() + "万人已购买");
         //是否购买
-        if (mBean.whetherBuy == 1) {
+        if (resultBean.getWhetherBuy() == 1) {
             //购买
-            holder.gsyVideoPlayer.setUpLazy(mData1.get(position).originalUrl, true, null, null, "视频播放标题");
+            holder.gsyVideoPlayer.setUpLazy(resultBeans.get(position).getOriginalUrl(), true, null, null, "视频播放标题");
             holder.YiBuy.setVisibility(View.GONE);
             holder.shikanlinner.setVisibility(View.GONE);
             holder.videoItemCoin.setImageResource(R.mipmap.common_icon_comment_samll_s);
         } else {
-            holder.gsyVideoPlayer.setUpLazy(mData1.get(position).shearUrl, true, null, null, "视频播放标题");
+            holder.gsyVideoPlayer.setUpLazy(resultBeans.get(position).getShearUrl(), true, null, null, "视频播放标题");
             holder.videoItemCoin.setImageResource(R.mipmap.common_icon_toll_n);
             holder.YiBuy.setVisibility(View.VISIBLE);
             holder.shikanlinner.setVisibility(View.VISIBLE);
         }
 
         //是否收藏
-        if (mBean.whetherCollection == 1) {
+        if (resultBean.getWhetherCollection() == 1) {
             miscollect = true;
             //收藏
         } else {
@@ -174,10 +175,10 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         }
 
         if (miscollect) {
-            mBean.setWhetherCollection(1);
+            resultBean.setWhetherCollection(1);
             holder.videoItemCollection.setImageResource(R.mipmap.common_button_collection_small_s);
         } else {
-            mBean.setWhetherCollection(2);
+            resultBean.setWhetherCollection(2);
             holder.videoItemCollection.setImageResource(R.mipmap.common_button_collection_small_n);
         }
 
@@ -188,9 +189,9 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
             @Override
             public void onClick(View v) {
                 ArrayList<Integer> integers = new ArrayList<>();
-                integers.add(mBean.id);
+                integers.add(resultBean.getId());
                 integers.add(position);
-               EventBus.getDefault().post(integers);
+                EventBus.getDefault().post(integers);
             }
         });
 
@@ -230,7 +231,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
         holder.videoItemBarrage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(mBean.getId());
+                EventBus.getDefault().post(resultBean.getId());
                 misdammu = !misdammu;
                 if (misdammu) {
                     //添加弹幕
@@ -254,8 +255,8 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
                     }
                 });
                 Integer[] ints = new Integer[3];
-                ints[0] = mBean.getId();
-                ints[1] = mBean.getPrice();
+                ints[0] = resultBean.getId();
+                ints[1] = resultBean.getPrice();
                 ints[2] = position;
                 EventBus.getDefault().post(ints);
             }
@@ -264,7 +265,7 @@ public class VideoAdpter extends RecyclerView.Adapter<VideoAdpter.VideoViewHolde
 
     @Override
     public int getItemCount() {
-        return mData1.size();
+        return resultBeans.size();
     }
 
     class VideoViewHolder extends RecyclerView.ViewHolder {

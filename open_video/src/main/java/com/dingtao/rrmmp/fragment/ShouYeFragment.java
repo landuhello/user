@@ -1,5 +1,6 @@
 package com.dingtao.rrmmp.fragment;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingtao.common.bean.DepartListBean;
 import com.dingtao.common.bean.HomeBannerBean;
@@ -32,8 +32,6 @@ import com.dingtao.rrmmp.activity.BingYaoActivity;
 import com.dingtao.rrmmp.activity.FindDoctorActivity;
 import com.dingtao.rrmmp.activity.HomeSeachActivity;
 import com.dingtao.rrmmp.activity.InfoMationActivity;
-import com.dingtao.rrmmp.activity.LoginActivity;
-import com.dingtao.rrmmp.adapter.DrugsAdapter;
 import com.dingtao.rrmmp.adapter.HomeDepartAdapter;
 import com.dingtao.rrmmp.adapter.HomeListOneAdapter;
 import com.dingtao.rrmmp.adapter.HomeTypeAdapter;
@@ -110,6 +108,14 @@ public class ShouYeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //头像点击进入个人详情页面
+        home_simple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build(Constant.ACTIVITY_URL_persion)
+                        .navigation(getContext());
+            }
+        });
         //健康评测
         home_vertu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +127,7 @@ public class ShouYeFragment extends Fragment {
                     /*com.dingtao.rrmmp.main.presenter.VertuPresenter vertuPresenter=new com.dingtao.rrmmp.main.presenter.VertuPresenter(new VertuP());
                     vertuPresenter.reqeust(mId,mSessionId);*/
 
-                    Intent intent=new Intent(getContext(),BannerWebViewActivity.class);
+                    Intent intent=new Intent(getContext(), BannerWebViewActivity.class);
                     intent.putExtra("bannerweb",1+"");
                     startActivity(intent);
 

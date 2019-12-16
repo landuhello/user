@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.dingtao.common.bean.DepartListBean;
 import com.dingtao.rrmmp.login.R;
-import com.facebook.drawee.view.SimpleDraweeView;
+
 
 import java.util.ArrayList;
 import java.util.List;
