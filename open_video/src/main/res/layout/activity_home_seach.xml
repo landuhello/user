@@ -15,6 +15,7 @@
         android:layout_height="@dimen/dp_32">
 
         <ImageView
+            android:background="#FFCCCCCC"
             android:id="@+id/seach_back_img"
             android:padding="@dimen/dp_7"
             android:src="@drawable/common_icon_back_black_n"
@@ -94,6 +95,7 @@
         <LinearLayout
             android:id="@+id/line"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_20"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_300">
 
