@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".activity.renwu.TaskActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.example.personaldetails.activity.BaseUserTitle
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_title"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/task_tit"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="36dp"
+                    android:textSize="14sp"
+                    android:textColor="#ffffff"
+                    android:text="签到条"
+                    android:gravity="center"
+                    android:background="@mipmap/my_task_title"/>
+
+                <com.example.personaldetails.activity.renwu.SignBar
+                    android:id="@+id/mybar"
+                    android:layout_marginTop="22dp"
+                    android:layout_below="@id/task_tit"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90dp" />
+
+                <TextView
+                    android:id="@+id/task_tit2"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/mybar"
+                    android:layout_width="100dp"
+                    android:layout_height="36dp"
+                    android:textSize="14sp"
+                    android:textColor="#ffffff"
+                    android:text="每日任务"
+                    android:gravity="center"
+                    android:background="@mipmap/my_task_title"/>
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/task_rec1"
+                    android:layout_below="@id/task_tit2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/task_tit3"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/task_rec1"
+                    android:layout_width="100dp"
+                    android:layout_height="36dp"
+                    android:textSize="14sp"
+                    android:textColor="#ffffff"
+                    android:text="一次性任务"
+                    android:gravity="center"
+                    android:background="@mipmap/my_task_title"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/task_rec2"
+                    android:layout_marginTop="24dp"
+                    android:layout_below="@id/task_tit3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+</RelativeLayout>

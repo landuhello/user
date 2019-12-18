@@ -17,6 +17,8 @@ import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.util.Constant;
 import com.example.personaldetails.R;
 import com.example.personaldetails.R2;
+import com.example.personaldetails.activity.renwu.TaskActivity;
+import com.example.personaldetails.activity.set.SettingActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,6 +26,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.cardview.widget.CardView;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -125,17 +128,17 @@ public class PersionActivity extends WDActivity {
         } else if (id == R.id.card_l2) {
 
         } else if (id == R.id.l1) {
-            if (mId!=0){
+            if (mId != 0) {
                 startActivity(new Intent(this, ArchivesActivity.class));
-            }else {
+            } else {
                 ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
                         .navigation(this);
             }
 
         } else if (id == R.id.l2) {
-            if (mId!=0){
+            if (mId != 0) {
                 startActivity(new Intent(this, WalletActivity.class));
-            }else {
+            } else {
                 ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
                         .navigation(this);
             }
@@ -152,8 +155,19 @@ public class PersionActivity extends WDActivity {
 
         } else if (id == R.id.l8) {
 
+            if (mId != 0) {
+                startActivity(new Intent(this, TaskActivity.class));
+            } else {
+                ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
+                        .navigation(this);
+            }
         } else if (id == R.id.l9) {
-
+            if (mId != 0) {
+                startActivity(new Intent(this, SettingActivity.class));
+            } else {
+                ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
+                        .navigation(this);
+            }
         }
     }
 }

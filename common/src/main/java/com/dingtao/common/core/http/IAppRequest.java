@@ -1,6 +1,8 @@
 package com.dingtao.common.core.http;
 
+import com.dingtao.common.bean.Commentontheist;
 import com.dingtao.common.bean.FindDoctorBean;
+import com.dingtao.common.bean.Hunt;
 import com.dingtao.common.bean.InfoMationBean;
 import com.dingtao.common.bean.FinduserarchivesBean;
 import com.dingtao.common.bean.LoginBean;
@@ -191,5 +193,19 @@ public interface IAppRequest {
                                                             @Query("sortBy")int sortBy,
                                                             @Query("page")int page,
                                                             @Query("count")int count);
+    //展示搜索
+    @GET("user/sickCircle/v1/searchSickCircle")
+    Observable<Result<List<Hunt>>> searchSickCircle(@Query("keyWord")String keyWord);
+    //发送评论
+    @POST("user/sickCircle/verify/v1/publishComment")
+    Observable<Result> publishComment(@Header("userId")int userId,
+                                      @Header("sessionId")String sessionId,
+                                      @Query("sickCircleId")int sickCircleId,
+                                      @Query("content")String content);
+    //展示pop查看评论列表
+    @GET("user/sickCircle/v1/findSickCircleCommentList")
+    Observable<Result<List<Commentontheist>>> findSickCircleCommentList(@Query("sickCircleId")int sickCircleId,
+                                                                        @Query("page")int page,
+                                                                        @Query("count")int count);
 
 }

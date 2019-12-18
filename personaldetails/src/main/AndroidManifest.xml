@@ -12,8 +12,9 @@
         <activity android:name=".activity.ArchivesActivity" />
         <activity android:name=".activity.PersionActivity"/>
         <activity android:name=".activity.set.UserMessageActivity"/>
-
-
+        <activity android:name=".activity.set.PasswordActivity"/>
+        <activity android:name=".activity.set.BrightnessActivity"/>
+        <activity android:name=".activity.renwu.TaskActivity"/>
     </application>
 
 </manifest>

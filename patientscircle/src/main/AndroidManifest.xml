@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.patientscircle">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application>
         <activity android:name=".activity.SickFriendsActivity">
             <!--<intent-filter>-->
@@ -11,6 +14,10 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".activity.ConditionsActivity"/>
+        <activity android:name=".activity.PatienthomeDetailsActivity"/>
+        <activity android:name=".activity.UserpageActivity"/>
+        <activity android:name=".activity.PublishedcircleActivity"/>
+
     </application>
 
 </manifest>
