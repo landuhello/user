@@ -151,4 +151,15 @@ public class LoginMainActivity extends WDActivity {
 
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        try{
+            mLoadDialog.dismiss();
+        }catch (Exception e) {
+            System.out.println("myDialog取消，失败！");
+            // TODO: handle exception
+        }
+        super.onDestroy();
+    }
 }

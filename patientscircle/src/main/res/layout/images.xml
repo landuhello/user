@@ -9,6 +9,7 @@
         android:id="@+id/publish_img"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:background="@drawable/release_promote_image_shape"
         android:scaleType="centerCrop"
         android:src="@mipmap/user_bg" />
 

@@ -107,7 +107,8 @@ public class SettingActivity extends BaseActivity<IUserModelImpl, IUserPresenter
         int id = view.getId();
         if (id == R.id.rela_head) {
             if (SPUtils.getInstance("login").getBoolean("isLogin")) {
-                sA(UserMessageActivity.class);
+                startActivity(new Intent(this,UserMessageActivity.class));
+
                 return;
             }
             ARouter.getInstance().build(Constant.ACTIVITY_URL_login)

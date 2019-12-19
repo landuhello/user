@@ -31,7 +31,7 @@ public class BrightnessActivity extends BaseActivity {
     @BindView(R2.id.brightnessleft)
     ImageView brightnessleft;
     @BindView(R2.id.brightnessleft_seek)
-    AppCompatSeekBar brightnessleftSeek;
+    SeekBar brightnessleftSeek;
     @BindView(R2.id.brightnessright)
     ImageView brightnessright;
 
@@ -45,18 +45,23 @@ public class BrightnessActivity extends BaseActivity {
             }
         });
         brightnessTitle.tName.setText("屏幕亮度");
+        //设置是否开启自动调节亮度
         BrightnessUtils.setAutoBrightnessEnabled(false);
+        //获取屏幕亮度
         int brightness = BrightnessUtils.getBrightness();
 
         //设置当前亮度
         brightnessleftSeek.setProgress((int) (brightness / 2.55));
+
         brightnessleftSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 BrightnessUtils.setAutoBrightnessEnabled(false);
                 int v = (int) (progress * 2.55);
+                //设置屏幕亮度
                 BrightnessUtils.setBrightness(v);
                 int brightness = BrightnessUtils.getBrightness();
+                Log.d("BrightnessActivity", "brightness:" + brightness);
 
             }
 

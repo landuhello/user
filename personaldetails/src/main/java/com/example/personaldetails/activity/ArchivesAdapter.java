@@ -16,7 +16,7 @@ import com.example.personaldetails.R;
 import java.util.ArrayList;
 
 /*
- *@Auther:王泽洋
+ *@Auther:老刘
  *@Date: 时间
  *@Description:功能
  * */

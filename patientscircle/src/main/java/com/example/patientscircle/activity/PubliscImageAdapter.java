@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
     @Override
     public void onBindViewHolder(@NonNull ViewhOler viewhOler, final int i) {
-        Glide.with(context).load(strings.get(i)).into(viewhOler.img);
+//        Glide.with(context).load(strings.get(i)).into(viewhOler.img);
 
         if(strings.get(i).toString().equals("2131623936")){
             viewhOler.x.setVisibility(View.GONE);

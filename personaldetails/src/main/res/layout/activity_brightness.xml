@@ -29,7 +29,7 @@
             android:layout_marginLeft="24dp"
             android:src="@mipmap/setting_icon_deep_color_sun_n" />
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <SeekBar
             android:id="@+id/brightnessleft_seek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

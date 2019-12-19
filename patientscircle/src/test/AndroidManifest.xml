@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.patientscircle">
-
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <application>
         <activity android:name=".activity.SickFriendsActivity">
             <!--<intent-filter>-->
@@ -12,6 +14,10 @@
 
         </activity>
         <activity android:name=".activity.ConditionsActivity"/>
+        <activity android:name=".activity.PublishedcircleActivity"/>
+        <activity android:name=".activity.UserpageActivity"/>
+        <activity android:name=".activity.PatienthomeDetailsActivity"/>
+        <activity android:name=".activity.SickFriendsActivity"/>
     </application>
 
 </manifest>

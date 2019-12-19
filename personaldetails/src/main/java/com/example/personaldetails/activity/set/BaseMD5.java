@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /*
- *@Auther:王泽洋
+ *@Auther:老刘
  *@Date: 时间
  *@Description:功能
  * */

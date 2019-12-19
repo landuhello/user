@@ -265,7 +265,7 @@ public class PublishedcircleActivity extends BaseActivity<ReleaseCrcleModelImpl,
 
     private void iniImages() {
         images = new ArrayList();
-
+        images.add(R.mipmap.add);
         publishRecy.setNestedScrollingEnabled(false);
         publishRecy.setLayoutManager(new GridLayoutManager(PublishedcircleActivity.this, 3, LinearLayoutManager.VERTICAL, false));
         imageAdapter = new PubliscImageAdapter(this, images);
