@@ -1,8 +1,8 @@
 package com.example.personaldetails.activity.set;
 
 /*
- *@Auther:
- *@Date:
+ *@Auther:老刘
+ *@Date:时间
  *@Description:
  * */
 public class SignEntity {

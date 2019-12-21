@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+//H币
 public class WalletActivity extends BaseActivity<WalletModelImpl, WalletPresenterImpl> implements WalletContract.WalletView {
 
 

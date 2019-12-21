@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:id="@+id/friends_home_cc"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/friends_home_head"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12sp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@mipmap/common_icon_keyboard_n"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/friends_home_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="急诊科"
+            android:textColor="#3087ea"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/patient_home_search"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toLeftOf="@+id/friends_home_rbbell"
+            android:layout_toRightOf="@+id/friends_home_tv"
+            android:background="@drawable/patient_circle__search_shap"
+            android:gravity="center_vertical"
+            android:hint="请输入病症名称或标题关键字"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="12dp"
+            android:singleLine="true"
+            android:textColor="#999999"
+            android:textColorHint="#999999"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/friends_home_titile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:maxLength="15"
+            android:text="标题"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/friends_home_rbbell"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+
+            android:src="@mipmap/common_nav_message_black_n" />
+    </RelativeLayout>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/friends_home_cc">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/friends_home_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/patient_circle_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="8"
+                    android:background="#ffffff"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="#3087ea"
+                    app:tabTextColor="#929292" />
+
+                <ImageView
+                    android:id="@+id/friends_home_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@mipmap/common_icon_search_n" />
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/patient_circle_recy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/patient_circle_tab"
+            android:layout_marginTop="4dp"
+            android:background="#ffffff"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <RadioGroup
+        android:id="@+id/patientvg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:background="@mipmap/the_bottom_bar"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <RadioButton
+            android:id="@+id/patienthome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableBottom="@drawable/home_home_sel"
+            android:gravity="center"
+            android:paddingBottom="15dp" />
+
+
+        <RadioButton
+            android:id="@+id/patientvideo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableBottom="@drawable/home_video_sel"
+            android:gravity="center"
+            android:paddingBottom="15dp" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/patientadvisory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:src="@mipmap/common_tab_circle_s"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</RelativeLayout>

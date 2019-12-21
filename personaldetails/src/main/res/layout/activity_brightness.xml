@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".activity.set.BrightnessActivity">
+
+
+    <com.example.personaldetails.activity.BaseUserTitle
+        android:id="@+id/brightness_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <!--slider-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_below="@+id/brightness_title"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/brightnessleft"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/setting_icon_deep_color_sun_n" />
+
+        <SeekBar
+            android:id="@+id/brightnessleft_seek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/brightnessright"
+            android:layout_toRightOf="@id/brightnessleft"
+            android:background="@null"
+            android:maxHeight="3.4dp"
+            android:minHeight="3.4dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:progress="50"
+            android:progressDrawable="@drawable/setting_seekbar__back_shap"
+            android:splitTrack="false"
+            android:thumb="@mipmap/slider" />
+
+        <ImageView
+            android:id="@+id/brightnessright"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/setting_seekbar__back_shap" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

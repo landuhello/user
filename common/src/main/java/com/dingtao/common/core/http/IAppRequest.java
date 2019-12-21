@@ -1,6 +1,8 @@
 package com.dingtao.common.core.http;
 
+import com.dingtao.common.bean.Commentontheist;
 import com.dingtao.common.bean.FindDoctorBean;
+import com.dingtao.common.bean.Hunt;
 import com.dingtao.common.bean.FindDoctorInfoBean;
 import com.dingtao.common.bean.InfoMationBean;
 import com.dingtao.common.bean.FinduserarchivesBean;
@@ -54,10 +56,9 @@ import retrofit2.http.Query;
  */
 public interface IAppRequest {
 
-    //查找档案
+//查找档案
     @GET("health/user/verify/v1/findUserArchives")
-    Observable<FinduserarchivesBean> doarchives(@Header("userId") int userId, @Header("sessionId") String sessionId);
-
+    Observable<FinduserarchivesBean> doarchives(@Header("userId")int userId,@Header("sessionId")String sessionId);
     //视频类目id
     @GET("health/user/video/v1/findVideoCategoryList")
     Observable<CategorylistBean> dovideo();
@@ -176,24 +177,38 @@ public interface IAppRequest {
 
     //咨询详情
     @GET("health/share/information/v1/findInformation")
-    Observable<Result<InfoMationBean>> FINDINFOMATION(@Header("userId") int userId, @Header("sessionId") String sessionId, @Query("infoId") int infoId);
+    Observable<Result<InfoMationBean>> FINDINFOMATION(@Header("userId")int userId, @Header("sessionId")String sessionId, @Query("infoId")int infoId);
 
     //咨询收藏
     @POST("health/user/verify/v1/addInfoCollection")
     @FormUrlEncoded
-    Observable<Result> ADDINFOCOLLECTION(@Header("userId") int userId, @Header("sessionId") String sessionId, @Field("infoId") int infoId);
+    Observable<Result> ADDINFOCOLLECTION(@Header("userId")int userId,@Header("sessionId")String sessionId,@Field("infoId") int infoId);
 
     //咨询取消收藏
     @DELETE("health/user/verify/v1/cancelInfoCollection")
-    Observable<Result> CANCELINFOCOLLECTION(@Header("userId") int userId, @Header("sessionId") String sessionId, @Query("infoId") int infoId);
+    Observable<Result> CANCELINFOCOLLECTION(@Header("userId")int userId,@Header("sessionId")String sessionId,@Query("infoId")int infoId);
 
     //查询医生列表
     @GET("health/user/inquiry/v1/findDoctorList")
-    Observable<Result<List<FindDoctorBean>>> FINDDOCTORLIST(@Query("deptId") int deptId,
-                                                            @Query("condition") int condition,
-                                                            @Query("sortBy") int sortBy,
-                                                            @Query("page") int page,
-                                                            @Query("count") int count);
+    Observable<Result<List<FindDoctorBean>>> FINDDOCTORLIST(@Query("deptId")int deptId,
+                                                            @Query("condition")int condition,
+                                                            @Query("sortBy")int sortBy,
+                                                            @Query("page")int page,
+                                                            @Query("count")int count);
+    //展示搜索
+    @GET("user/sickCircle/v1/searchSickCircle")
+    Observable<Result<List<Hunt>>> searchSickCircle(@Query("keyWord")String keyWord);
+    //发送评论
+    @POST("user/sickCircle/verify/v1/publishComment")
+    Observable<Result> publishComment(@Header("userId")int userId,
+                                      @Header("sessionId")String sessionId,
+                                      @Query("sickCircleId")int sickCircleId,
+                                      @Query("content")String content);
+    //展示pop查看评论列表
+    @GET("user/sickCircle/v1/findSickCircleCommentList")
+    Observable<Result<List<Commentontheist>>> findSickCircleCommentList(@Query("sickCircleId")int sickCircleId,
+                                                                        @Query("page")int page,
+                                                                        @Query("count")int count);
 
     //yi医生详情
     @GET("health/user/inquiry/v1/findDoctorInfo")
@@ -220,4 +235,3 @@ public interface IAppRequest {
                                @Header("sessionId")String sessionI从d,
                                @Query("doctorId")int doctorId);
 }
-

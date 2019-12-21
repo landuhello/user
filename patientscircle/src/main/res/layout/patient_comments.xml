@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/patient_comment_xrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp" />
+
+    <RelativeLayout
+        android:id="@+id/patient_comment_ccc"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+
+        <ImageView
+            android:id="@+id/patient_circle_collection_err"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/common_button_close_n" />
+
+        <TextView
+            android:id="@+id/patient_circle_collection_edt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/patient_circle_collection_err"
+            android:background="@drawable/patient_comments_edt_shap"
+            android:gravity="center_vertical"
+            android:hint="在此留下高见"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/none_comment"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:src="@mipmap/none_comment"
+        android:visibility="gone" />
+
+</RelativeLayout>

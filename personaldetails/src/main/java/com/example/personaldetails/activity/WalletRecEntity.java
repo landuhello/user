@@ -3,7 +3,7 @@ package com.example.personaldetails.activity;
 import java.util.List;
 
 /*
- *@Auther:王泽洋
+ *@Auther:老刘
  *@Date: 时间
  *@Description:功能
  * */

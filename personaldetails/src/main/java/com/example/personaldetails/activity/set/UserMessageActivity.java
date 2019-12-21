@@ -4,6 +4,7 @@ package com.example.personaldetails.activity.set;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -127,6 +128,7 @@ public class UserMessageActivity extends BaseActivity<IUserModelImpl, IUserPrese
             head.setImageURI(pic);
             name.setText(userEntity.getResult().getNickName());
             email.setText(userEntity.getResult().getEmail());
+            Log.i("aaaaa",userEntity.getResult().getEmail());
             height.setText(userEntity.getResult().getHeight() + "cm");
             age.setText(userEntity.getResult().getAge() + "");
             weight.setText(userEntity.getResult().getWeight() + "kg");

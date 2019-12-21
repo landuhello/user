@@ -17,8 +17,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /*
- *@Auther:陈浩
- *@Date: 2019/6/29
+ *@Auther:老刘
+ *@Date: 2019/12/9
  *@Time:8:52
  *@Description:${网络请求类}
  * */public class HttpUntils {

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="login_btn_color">#ff5f71</color>
+    <color name="color_btn">#3087ea</color>
+    <color name="mywhite">#ffffff</color>
 </resources>

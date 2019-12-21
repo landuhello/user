@@ -3,6 +3,7 @@ package com.example.personaldetails.activity.set;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -106,7 +107,8 @@ public class SettingActivity extends BaseActivity<IUserModelImpl, IUserPresenter
         int id = view.getId();
         if (id == R.id.rela_head) {
             if (SPUtils.getInstance("login").getBoolean("isLogin")) {
-                sA(UserMessageActivity.class);
+                startActivity(new Intent(this,UserMessageActivity.class));
+
                 return;
             }
             ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
@@ -114,6 +116,8 @@ public class SettingActivity extends BaseActivity<IUserModelImpl, IUserPresenter
         } else if (id == R.id.rela_update) {
             if (SPUtils.getInstance("login").getBoolean("isLogin")) {
                 //跳转改密码页面
+
+                startActivity(new Intent(this,PasswordActivity.class));
                 return;
             }
             ARouter.getInstance().build(Constant.ACTIVITY_URL_login)
@@ -124,6 +128,7 @@ public class SettingActivity extends BaseActivity<IUserModelImpl, IUserPresenter
             DataCleanManager.clearAllCache(this);
         } else if (id == R.id.rela_light) {
             //跳转屏幕亮度
+            startActivity(new Intent(this,BrightnessActivity.class));
 
         } else if (id == R.id.rela_version) {
         } else if (id == R.id.rela_help) {

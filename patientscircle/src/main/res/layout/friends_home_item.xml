@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    >
+
+    <RelativeLayout
+        android:id="@+id/home_item_cc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/home_item_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="急寻：面神经炎的治疗方法"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/home_item_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/h_currency" />
+
+        <TextView
+            android:id="@+id/home_item_tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:text="20"
+            android:textColor="#d92109"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/home_item_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_item_tv1"
+            android:layout_marginTop="10dp"
+            android:text="2018-12-28 12:28"
+            android:textColor="#333333"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/home_item_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_item_tv2"
+            android:layout_marginTop="8dp"
+            android:text="周围性神经炎，下巴斜的，口齿不清，眼睛闭合不了，右边脸明显动不了"
+            android:textColor="#333333"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_item_tv3"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/home_item_tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="收藏"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/home_item_tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/home_item_tv4"
+                android:text="3"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/home_item_tv6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/home_item_tv5"
+                android:text="建议"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/home_item_tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/home_item_tv6"
+                android:text="109"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@+id/home_item_cc"
+        android:layout_marginTop="20dp"
+        android:background="#7f7f7f" />
+</RelativeLayout>
