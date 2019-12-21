@@ -3,8 +3,10 @@
     package="com.dingtao.rrmmp.login">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application>
-        <activity android:name="com.dingtao.rrmmp.activity.FindDoctorActivity"></activity>
+        <activity android:name="com.dingtao.rrmmp.activity.DoctorDetailsActivity"></activity>
+        <activity android:name="com.dingtao.rrmmp.activity.FindDoctorActivity" />
         <activity android:name="com.dingtao.rrmmp.activity.InfoMationActivity" />
         <activity android:name="com.dingtao.rrmmp.activity.LoginActivity">
 
@@ -23,4 +25,3 @@
     </application>
 
 </manifest>
-

@@ -3,6 +3,8 @@ package com.dingtao.rrmmp.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,15 +42,27 @@ public class FindDoctorActivity extends AppCompatActivity {
     private TextView tv_ask;
     private SimpleDraweeView sdv_left;
     private SimpleDraweeView sdv_right;
+    private ImageView iv_xq;
     private RecyclerView rv_doctor;
     private FindDepartAdapter findDepartAdapter;
     private FindDoctorAdapter findDoctorAdapter;
+    int conditionId=1;
+    int findPosition;
+    int doctorinfoid;
+    private int doctorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_doctor);
         initView();
+
+        tv_ask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         //请求科室类目
         com.dingtao.rrmmp.main.presenter.DepartPresenter departPresenter = new com.dingtao.rrmmp.main.presenter.DepartPresenter(new MainDepartPresenter());
@@ -64,17 +78,19 @@ public class FindDoctorActivity extends AppCompatActivity {
         inquiry_rv.setLayoutManager(linearLayoutManager);
         inquiry_rv.setAdapter(findDepartAdapter);
 
+        findDepartAdapter.setmPostion(Integer.valueOf(dids));
+        findPosition=Integer.valueOf(dids);
+        final FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+        findDoctorPresenter.reqeust(Integer.valueOf(dids),conditionId,0,1,5);
+
         findDepartAdapter.setDepartBack(new FindDepartAdapter.DepartBack() {
             @Override
             public void backId(int did,int postionfind) {
-                if (Integer.valueOf(dids)==did){
-                    findDepartAdapter.setmPostion(Integer.valueOf(dids));
-                    FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
-                    findDoctorPresenter.reqeust(Integer.valueOf(dids),1,0,1,5);
-                }else {
-                    FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
-                    findDoctorPresenter.reqeust(Integer.valueOf(dids),1,0,1,5);
-                  }
+                findDoctorAdapter.setmPostion(did);
+                findDepartAdapter.setMdids(postionfind);
+                findPosition=did;
+                FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+                findDoctorPresenter.reqeust(did,conditionId,0,1,5);
             }
         });
 
@@ -86,7 +102,7 @@ public class FindDoctorActivity extends AppCompatActivity {
 
         findDoctorAdapter.setFindDoctorBack(new FindDoctorAdapter.FindDoctorBack() {
             @Override
-            public void findBack(FindDoctorBean findDoctorBean,int mi) {
+            public void findBack(final FindDoctorBean findDoctorBean, int mi) {
                 if (findDoctorBean != null) {
                     findDoctorAdapter.setmPostion(mi);
                     Uri uri=Uri.parse(findDoctorBean.imagePic);
@@ -94,13 +110,59 @@ public class FindDoctorActivity extends AppCompatActivity {
                     tv_name.setText(findDoctorBean.doctorName);
                     tv_jobTitle.setText(findDoctorBean.jobTitle);
                     tv_inauguralHospital.setText(findDoctorBean.inauguralHospital);
-                    tv_praiseNum.setText(findDoctorBean.praise);
-                    tv_serverNum.setText("服务患者数:   "+findDoctorBean.serverNum);
-                    tv_servicePrice.setText(findDoctorBean.servicePrice+"/次");
+                    tv_praiseNum.setText("好评率:"+findDoctorBean.praise);
+                     tv_servicePrice.setText(findDoctorBean.servicePrice+"H币/次");
+                    doctorId = findDoctorBean.doctorId;
                 }
             }
         });
 
+        //医生详情
+        iv_xq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(FindDoctorActivity.this,DoctorDetailsActivity.class);
+                intent.putExtra("doctorids",doctorId+"");
+                startActivity(intent);
+            }
+        });
+
+        //综合
+        tv_zh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conditionId=1;
+                FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+                findDoctorPresenter.reqeust(findPosition,conditionId,0,1,5);
+            }
+        });
+        //好评
+        tv_hp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conditionId=2;
+                FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+                findDoctorPresenter.reqeust(findPosition,conditionId,0,1,5);
+            }
+        });
+        //咨询数
+        tv_zxs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conditionId=3;
+                FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+                findDoctorPresenter.reqeust(findPosition,conditionId,0,1,5);
+            }
+        });
+        //价格
+        tv_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conditionId=4;
+                FindDoctorPresenter findDoctorPresenter=new FindDoctorPresenter(new FindDoctorP());
+                findDoctorPresenter.reqeust(findPosition,conditionId,1,1,5);
+            }
+        });
     }
 
     private void initView() {
@@ -120,14 +182,25 @@ public class FindDoctorActivity extends AppCompatActivity {
         sdv_left = (SimpleDraweeView) findViewById(R.id.sdv_left);
         sdv_right = (SimpleDraweeView) findViewById(R.id.sdv_right);
         rv_doctor = (RecyclerView) findViewById(R.id.rv_doctor);
+        iv_xq = (ImageView) findViewById(R.id.iv_xq);
     }
     //医生列表
     private class FindDoctorP implements DataCall<List<FindDoctorBean>> {
         @Override
-        public void success(List<FindDoctorBean> data, Object... args) {
+        public void success(final List<FindDoctorBean> data, Object... args) {
             findDoctorAdapter.OnClear();
             findDoctorAdapter.OnAddAll(data);
             findDoctorAdapter.notifyDataSetChanged();
+
+            Uri uri=Uri.parse(data.get(0).imagePic);
+            sdv_pic.setImageURI(uri);
+            tv_name.setText(data.get(0).doctorName);
+            tv_jobTitle.setText(data.get(0).jobTitle);
+            tv_inauguralHospital.setText(data.get(0).inauguralHospital);
+            tv_praiseNum.setText("好评率:"+data.get(0).praise);
+            tv_serverNum.setText("服务患者数:   "+data.get(0).serverNum);
+            tv_servicePrice.setText(data.get(0).servicePrice+"H币/次");
+
         }
 
         @Override

@@ -58,7 +58,7 @@ public class FindDepartAdapter extends RecyclerView.Adapter<FindDepartAdapter.Ty
             }
         });
 
-        if (position==getmPostion()){
+        if (list.get(position).id==getmPostion()){
             holder.depart_text_name.setTextColor(Color.BLUE);
         }else{
             holder.depart_text_name.setTextColor(Color.BLACK);
@@ -99,5 +99,15 @@ public class FindDepartAdapter extends RecyclerView.Adapter<FindDepartAdapter.Ty
 
     public void setmPostion(int mPostion) {
         this.mPostion = mPostion;
+    }
+
+    public int mdids;
+
+    public int getMdids() {
+        return mdids;
+    }
+
+    public void setMdids(int mdids) {
+        this.mdids = mdids;
     }
 }

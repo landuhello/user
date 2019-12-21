@@ -126,6 +126,7 @@ public class LoginMainActivity extends WDActivity {
 
         @Override
         public void success(LoginBean data, Object... args) {
+            mLoadDialog.dismiss();
             SPUtils.getInstance("login").put("email", trim);
             SPUtils.getInstance("login").put("pwd", encryptone);
             SPUtils.getInstance("login").put("isLogin", true);

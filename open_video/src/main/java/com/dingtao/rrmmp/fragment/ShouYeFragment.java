@@ -343,7 +343,6 @@ public class ShouYeFragment extends Fragment {
         @Override
         public void success(Result<String> data, Object... args) {
             Intent intent=new Intent(getContext(),BannerWebViewActivity.class);
-
             intent.putExtra("bannerweb",data.getResult());
             startActivity(intent);
         }
