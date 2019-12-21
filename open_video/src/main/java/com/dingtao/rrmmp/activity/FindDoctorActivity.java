@@ -60,7 +60,7 @@ public class FindDoctorActivity extends AppCompatActivity {
         tv_ask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 

@@ -1,5 +1,6 @@
 package com.dingtao.rrmmp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class AdministrativeAdapter extends RecyclerView.Adapter<AdministrativeAd
         return new MyViewHolder(inflate);
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(@NonNull final AdministrativeAdapter.MyViewHolder holder, final int position) {
         holder.administrative.setText(list.get(position).departmentName);
@@ -58,7 +60,7 @@ public class AdministrativeAdapter extends RecyclerView.Adapter<AdministrativeAd
             }
         });
         if (position == getmPosition()) {
-            holder.administrative.setTextColor(holder.itemView.getResources().getColor(R.color.color_btn));
+            holder.administrative.setTextColor(holder.itemView.getResources().getColor(Color.GREEN));
         }else{
 //            否则的话就全白色初始化背景
            holder.administrative.setTextColor(Color.GRAY);

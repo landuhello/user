@@ -25,6 +25,7 @@ import com.dingtao.common.core.WDActivity;
 import com.dingtao.common.core.exception.ApiException;
 import com.dingtao.rrmmp.adapter.FindSickAdapter;
 import com.dingtao.rrmmp.login.R;
+
 import com.dingtao.rrmmp.login.R2;
 import com.dingtao.rrmmp.presenter.CommentPresenter;
 import com.dingtao.rrmmp.presenter.FindSickPresenter;
