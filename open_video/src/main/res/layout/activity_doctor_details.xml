@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dingtao.rrmmp.activity.DoctorDetailsActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:id="@+id/d_back_img"
+            android:src="@drawable/common_icon_back_black_n"
+            android:padding="@dimen/dp_8"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:text="医生详情"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/dp_110"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/d_simple"
+                android:layout_width="@dimen/dp_128"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_height="@dimen/dp_160" />
+
+            <TextView
+                android:id="@+id/d_name"
+                android:text="曾小贤"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp_22"
+                android:layout_toRightOf="@id/d_simple"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_zy"
+                android:textColor="#333333"
+                android:text="主治医师"
+                android:layout_toRightOf="@id/d_name"
+                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textSize="@dimen/sp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/d_gz_n"
+                android:src="@drawable/common_icon_attention_large_n"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
+
+            <ImageView
+                android:id="@+id/d_gz_s"
+                android:src="@drawable/common_icon_attention_large_s"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24" />
+
+            <TextView
+                android:id="@+id/d_dz"
+                android:text="XXXXXXX医院"
+                android:textSize="@dimen/sp_12"
+                android:textColor="#333333"
+                android:layout_below="@id/d_name"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/d_simple"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_hp"
+                android:text="好评率 98%"
+                android:textSize="@dimen/sp_12"
+                android:textColor="#333333"
+                android:layout_below="@id/d_dz"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/d_simple"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_hzs"
+                android:text="服务患者数 98%"
+                android:textSize="@dimen/sp_12"
+                android:textColor="#333333"
+                android:layout_below="@id/d_dz"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/d_hp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/d_view"
+                android:background="#359CF1"
+                android:layout_below="@id/d_hp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/d_simple"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_14" />
+
+            <TextView
+                android:text="他收到的礼物"
+                android:textSize="@dimen/sp_12"
+                android:textColor="#333333"
+                android:layout_below="@id/d_hp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_toRightOf="@id/d_view"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/d_lw_recycler"
+                android:layout_below="@id/d_view"
+                android:layout_toRightOf="@id/d_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_60">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:id="@+id/d_view1"
+                android:background="#DE48F8"
+                android:layout_below="@id/d_simple"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_14" />
+
+            <TextView
+                android:text="个人简介"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#333333"
+                android:layout_below="@id/d_simple"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_toRightOf="@id/d_view1"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_jj"
+                android:text="无"
+                android:textSize="@dimen/sp_10"
+                android:textColor="#333333"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_below="@id/d_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/d_view2"
+                android:background="#DE48F8"
+                android:layout_below="@id/d_jj"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_14" />
+
+            <TextView
+                android:text="擅长领域"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#333333"
+                android:layout_below="@id/d_jj"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_toRightOf="@id/d_view1"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_ly"
+                android:text="无"
+                android:textColor="#333333"
+                android:textSize="@dimen/sp_10"
+                android:layout_below="@id/d_view2"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginTop="@dimen/sp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/d_view3"
+                android:background="#359CF1"
+                android:layout_below="@id/d_ly"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="@dimen/dp_14" />
+
+            <TextView
+                android:id="@+id/d_pl"
+                android:text="用户评价"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#333333"
+                android:layout_below="@id/d_ly"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_toRightOf="@id/d_view1"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d_plnum"
+                android:text="(18条评论)"
+                android:textSize="@dimen/sp_10"
+                android:textColor="#333333"
+                android:layout_below="@id/d_ly"
+                android:layout_marginTop="@dimen/dp_24"
+                android:layout_toRightOf="@id/d_pl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/d_pl_recycler"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_below="@id/d_view3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/d_ckgd"
+                android:textSize="@dimen/sp_12"
+                android:textColor="#3087ea"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_centerHorizontal="true"
+                android:text="点击查看更多评论"
+                android:layout_below="@id/d_pl_recycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_below="@id/d_ckgd"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_40">
+
+                    <TextView
+                        android:id="@+id/d_bi"
+                        android:text="500H币"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/sp_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="/次"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:layout_toRightOf="@id/d_bi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/d_btn_zx"
+                    android:text="立即咨询"
+                    android:textColor="#fff"
+                    android:background="#C15AF8"
+                    android:textSize="@dimen/sp_16"
+                    android:layout_width="@dimen/dp_117"
+                    android:layout_height="@dimen/dp_40" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>

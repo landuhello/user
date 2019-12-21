@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.personaldetails">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity android:name=".activity.set.SettingActivity"></activity>
+        <activity android:name=".activity.RechargeActivity" />
+        <activity android:name=".activity.WalletActivity" />
+        <activity android:name=".activity.ArchivesActivity" />
+        <activity android:name=".activity.PersionActivity"/>
+        <activity android:name=".activity.set.UserMessageActivity"/>
+
+
+    </application>
+
+</manifest>
